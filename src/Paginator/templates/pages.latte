@@ -1,0 +1,15 @@
+<div class="btn-group btn-group-sm" n:inner-foreach="$steps as $step">
+
+	<a n:attr="href => $pages->isFirst() ? '#' : $link('page!', $pages->getPage() - 1)" n:class="btn, btn-outline-secondary, $isAjax ? ajax, $pages->isFirst() ? disabled" n:if="$iterator->isFirst()">
+		{_ublaboo_datagrid.previous|noescape}
+	</a>
+
+	<a n:attr="href => !$step || $pages->getPage() == $step ? '#' : $link('page!', $step)" n:class="btn, $step == $pages->getPage() ? 'btn-primary' : 'btn-outline-secondary', !$step ? disabled, $isAjax ? ajax">
+		{$step ?? '...'}
+	</a>
+
+	<a n:attr="href => $pages->isLast() ? '#' : $link('page!', $pages->getPage() + 1)" n:class="btn, btn-outline-secondary, $isAjax ? ajax, $pages->isLast() ? disabled" n:if="$iterator->isLast()">
+		{_ublaboo_datagrid.next|noescape}
+	</a>
+
+</div>

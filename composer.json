@@ -1,0 +1,43 @@
+{
+	"name": "juniwalk/components",
+	"description": "Package of basic nette components.",
+	"type": "library",
+	"keywords": ["nette","nettefw","components"],
+	"license": "MIT",
+
+	"authors": [{
+		"name": "Martin Procházka",
+		"email": "juniwalk@outlook.cz",
+		"role": "Developer"
+	}],
+
+	"autoload": {
+		"psr-4": {"JuniWalk\\Components\\": "src/"}
+	},
+
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"phpstan/extension-installer": true
+		}
+	},
+
+	"require": {
+		"php": ">=8.2",
+		"juniwalk/utils": "dev-main"
+	},
+
+	"require-dev": {
+		"doctrine/orm": "^2.0",
+		"latte/latte": "^3.0",
+		"nette/tester": "^2.5",
+		"phpstan/extension-installer": "^1.0",
+		"phpstan/phpstan": "^1.0",
+		"phpstan/phpstan-nette": "^1.0",
+		"staabm/phpstan-todo-by": "^0.1",
+		"tracy/tracy": "^2.10",
+		"ublaboo/datagrid": "^6.10"
+	}
+}

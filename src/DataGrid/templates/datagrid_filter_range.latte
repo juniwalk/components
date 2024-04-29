@@ -1,0 +1,14 @@
+<div class="form-group row">
+	<div class="col-sm-3 text-sm-right">
+		<label n:name="$input['from']" class="col-form-label font-weight-normal py-1">{$input['from']->getCaption()|translate}</label>
+	</div>
+	<div class="col-sm-9">
+		<div class="input-group input-group-sm">
+			<input n:name="$input['from']" type="text" class="form-control">
+			<div class="input-group-append">
+				<span class="input-group-text border-right-0">&dash;</span>
+			</div>
+			<input n:name="$input['to']" type="text" class="form-control">
+		</div>
+	</div>
+</div>

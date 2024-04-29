@@ -1,0 +1,34 @@
+
+#
+# @copyright Martin Procházka (c) 2022
+# @license   MIT License
+#
+
+no_item_found_reset: 'Nenalezeny žádné záznamy. Můžete resetovat filtraci'
+no_item_found: 'Nenalezeny žádné záznamy.'
+here: 'zde'
+items: 'Záznamů'
+all: 'vše'
+from: 'od'
+to: 'do'
+reset_filter: 'Zrušit filtraci'
+group_actions: 'Hromadné akce'
+show: 'Ukázat'
+add: 'Přidat'
+edit: 'Upravit'
+show_all_columns: 'Ukaž všechny sloupce'
+show_default_columns: 'Ukaž základní sloupce'
+hide_column: 'Skrýt sloupec'
+action: 'Akce'
+previous: 'Předchozí'
+next: 'Další'
+choose: 'Zvolit'
+choose_input_required: 'Hromadná akce nedovoluje prázdný text'
+execute: 'Spustit'
+save: 'Uložit'
+cancel: 'Zrušit'
+multiselect_choose: 'Zvolit'
+multiselect_selected: '{0} zvoleno'
+filter_submit_button: 'Filtrovat'
+show_filter: 'Filtrace'
+per_page_submit: 'Změnit'
