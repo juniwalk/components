@@ -7,6 +7,7 @@
 
 namespace JuniWalk\Components\DataGrid;
 
+use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Enums\Interfaces\LabeledEnum;
 use JuniWalk\Utils\Html;
 use Nette\Application\UI\Control;
@@ -126,7 +127,7 @@ abstract class AbstractGrid extends Control
 
 		foreach ($enum::cases() as $item) {
 			$class = $blockButtons ?? ' btn-block text-right';
-			$class .= $item->color()->for('btn');
+			$class .= ($item->color() ?? Color::Secondary)->for('btn');
 
 			$option = $column->addOption($item->value, $item->label())
 				->setClass($class);

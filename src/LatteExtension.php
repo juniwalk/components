@@ -16,6 +16,7 @@ use JuniWalk\Utils\Format;
 use JuniWalk\Utils\Html;
 use JuniWalk\Utils\Json;
 use Latte\Extension;
+use UnexpectedValueException;
 
 class LatteExtension extends Extension
 {
@@ -80,14 +81,23 @@ class LatteExtension extends Extension
 	}
 
 
+	/**
+	 * @throws UnexpectedValueException
+	 */
 	protected function filterPrice(
 		?float $amount,
 		string|CurrencyInterface $currency,
 		bool $isColored = true,
 		string ...$classes,
 	): Html {
-		/** @var CurrencyInterface */
-		$currency = Currency::remake($currency);
+		if (is_string($currency) && method_exists(Currency::class, 'remake')) { // @phpstan-ignore-line
+			/** @var CurrencyInterface */
+			$currency = Currency::remake($currency);
+		}
+
+		if (is_string($currency)) {
+			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class);
+		}
 
 		/** @var Html */
 		return Html::price((float) $amount, $currency, isColoredBySign: $isColored)->addClass($classes);
