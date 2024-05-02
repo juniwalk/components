@@ -9,6 +9,7 @@ namespace JuniWalk\Components\Traits;
 
 use JuniWalk\Components\Modal;
 use JuniWalk\Utils\Interfaces\EventHandler;
+use JuniWalk\Utils\UI\Modal as ModalFromUtils;
 use Nette\InvalidArgumentException;
 
 trait ModalHandler
@@ -16,7 +17,7 @@ trait ModalHandler
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	public function openModal(Modal|string $modal, array $params = []): void
+	public function openModal(ModalFromUtils|Modal|string $modal, array $params = []): void
 	{
 		if (is_string($modal) && !str_starts_with($modal, '#')) {
 			$modal = $this->getComponent($modal, true);
