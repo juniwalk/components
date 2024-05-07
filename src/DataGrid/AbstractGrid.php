@@ -22,6 +22,8 @@ use UnexpectedValueException;
 
 abstract class AbstractGrid extends Control
 {
+	protected const TemplatesDir = __DIR__.'/templates';
+
 	protected DataGrid $grid;
 	protected ?Translator $translator = null;
 	protected bool $hasFiltersAlwaysShown = true;
@@ -122,7 +124,7 @@ abstract class AbstractGrid extends Control
 		}
 
 		$column = $this->grid->addColumnStatus($name, $title)->setAlign('right');
-		$column->setTemplate(__DIR__.'/templates/datagrid_column_status.latte');
+		$column->setTemplate(static::TemplatesDir.'/datagrid_column_status.latte');
 		$column->onChange[] = fn($id, $value) => $this->$signalMethod((int) $id, $enum::make($value));
 
 		foreach ($enum::cases() as $item) {
@@ -185,7 +187,7 @@ abstract class AbstractGrid extends Control
 		$gridTemplate->title = $this->title;
 
 		$template = $this->getTemplate();
-		$template->setFile(__DIR__.'/templates/datagrid-wrapper.latte');
+		$template->setFile(static::TemplatesDir.'/datagrid-wrapper.latte');
 		$template->render();
 	}
 
@@ -210,8 +212,8 @@ abstract class AbstractGrid extends Control
 		$grid = $this->grid = new DataGrid;
 		$grid->setRememberState($rememberState);
 		$grid->setRefreshUrl(!$rememberState);
-		$grid->setCustomPaginatorTemplate(__DIR__.'/templates/datagrid_paginator.latte');
-		$grid->setTemplateFile(__DIR__.'/templates/datagrid.latte');
+		$grid->setCustomPaginatorTemplate(static::TemplatesDir.'/datagrid_paginator.latte');
+		$grid->setTemplateFile(static::TemplatesDir.'/datagrid.latte');
 		$grid->setItemsPerPageList([10, 20, 50], false);
 		$grid->setDefaultPerPage(20);
 
