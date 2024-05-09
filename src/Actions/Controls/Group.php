@@ -8,6 +8,7 @@
 namespace JuniWalk\Components\Actions\Controls;
 
 use JuniWalk\Components\Actions\Action;
+use JuniWalk\Components\Actions\Component;
 use JuniWalk\Components\Actions\Traits\Actions;
 use JuniWalk\Components\Actions\Traits\Control;
 use JuniWalk\Utils\Html;
@@ -16,7 +17,7 @@ use Nette\Application\UI\Control as UIControl;
 use Nette\ComponentModel\IComponent;
 use Nette\InvalidStateException;
 
-class Group extends UIControl implements Action
+class Group extends UIControl implements Action, Component
 {
 	use Actions, Control;
 

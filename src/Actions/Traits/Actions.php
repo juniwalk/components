@@ -10,7 +10,10 @@ namespace JuniWalk\Components\Actions\Traits;
 use JuniWalk\Components\Actions\Action;
 use JuniWalk\Components\Actions\Component;
 use JuniWalk\Components\Actions\LinkProvider;
-use JuniWalk\Components\Actions\Controls;
+use JuniWalk\Components\Actions\Controls\Button;
+use JuniWalk\Components\Actions\Controls\Divider;
+use JuniWalk\Components\Actions\Controls\Dropdown;
+use JuniWalk\Components\Actions\Controls\Group;
 use JuniWalk\Utils\Strings;
 use Nette\Application\UI\Link;
 use Nette\Application\UI\Presenter;
@@ -19,9 +22,9 @@ use Stringable;
 
 trait Actions
 {
-	public function addGroup(?string $name = null): Action
+	public function addGroup(?string $name = null): Group
 	{
-		$action = new Controls\Group($name ?? Random::generate(6));
+		$action = new Group($name ?? Random::generate(6));
 		return $this->addAction($action);
 	}
 
@@ -29,9 +32,9 @@ trait Actions
 	/**
 	 * @param array<string, scalar> $args
 	 */
-	public function addButton(string $name, Stringable|string|null $label = null, Link|string|null $dest = null, array $args = []): Action
+	public function addButton(string $name, Stringable|string|null $label = null, Link|string|null $dest = null, array $args = []): Button
 	{
-		$action = new Controls\Button($name, $label);
+		$action = new Button($name, $label);
 		$action->monitor(Presenter::class, function() use ($action, $name, $dest, $args) {
 			/** @var LinkProvider */
 			$linkProvider = $action->lookup(LinkProvider::class);
@@ -42,20 +45,25 @@ trait Actions
 	}
 
 
-	public function addDropdown(string $name, Stringable|string|null $label = null): Action
+	public function addDropdown(string $name, Stringable|string|null $label = null): Dropdown
 	{
-		$action = new Controls\Dropdown($name, $label);
+		$action = new Dropdown($name, $label);
 		return $this->addAction($action);
 	}
 
 
-	public function addDivider(?string $name = null): Action
+	public function addDivider(?string $name = null): Divider
 	{
-		$action = new Controls\Divider($name ?? Random::generate(6));
+		$action = new Divider($name ?? Random::generate(6));
 		return $this->addAction($action);
 	}
 
 
+	/**
+	 * @template T of Action
+	 * @param  T $action
+	 * @return T
+	 */
 	public function addAction(Action $action): Action
 	{
 		if ($action instanceof Component) {

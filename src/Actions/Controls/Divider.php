@@ -8,13 +8,12 @@
 namespace JuniWalk\Components\Actions\Controls;
 
 use JuniWalk\Components\Actions\Action;
-use JuniWalk\Components\Actions\Traits\Control;
 use JuniWalk\Utils\Html;
 use Nette\Application\UI\Control as UIControl;
 
 class Divider extends UIControl implements Action
 {
-	use Control;
+	private Html $control;
 
 	public function __construct(
 		private string $name,
@@ -26,7 +25,7 @@ class Divider extends UIControl implements Action
 
 	public function create(): Html
 	{
-		return $this->getControl();
+		return clone $this->control;
 	}
 
 

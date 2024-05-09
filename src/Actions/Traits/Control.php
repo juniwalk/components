@@ -7,10 +7,14 @@
 
 namespace JuniWalk\Components\Actions\Traits;
 
+use JuniWalk\Components\Actions\Component;
 use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Html;
 use Nette\Localization\Translator;
 
+/**
+ * @phpstan-require-implements Component
+ */
 trait Control
 {
 	private ?Translator $translator = null;
