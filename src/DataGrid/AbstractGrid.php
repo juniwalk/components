@@ -12,6 +12,7 @@ use JuniWalk\Utils\Enums\Interfaces\LabeledEnum;
 use JuniWalk\Utils\Html;
 use Nette\Application\UI\Control;
 use Nette\Localization\ITranslator as Translator;
+use Nette\Utils\Html as NetteHtml;
 // use Nette\Localization\Translator;
 use Ublaboo\DataGrid\Column\Column;
 use Ublaboo\DataGrid\Column\ColumnDateTime;
@@ -161,7 +162,7 @@ abstract class AbstractGrid extends Control
 	}
 
 
-	final public function redrawItem(string|int $id): void
+	final public function redrawItem(int|string $id): void
 	{
 		$this->getComponent('grid')->redrawItem($id);
 		$this->getPresenter()->redirect('this');
@@ -205,9 +206,10 @@ abstract class AbstractGrid extends Control
 	 * @param mixed[] $items
 	 */
 	protected function onDataLoaded(array $items): void {}
+	protected function onRowRender(mixed $item, NetteHtml $html): void {}
 
 
-	final protected function createDataGrid(bool $rememberState = true, string $primaryKey = null): DataGrid
+	final protected function createDataGrid(bool $rememberState = true, ?string $primaryKey = null): DataGrid
 	{
 		$grid = $this->grid = new DataGrid;
 		$grid->setRememberState($rememberState);
@@ -240,10 +242,5 @@ abstract class AbstractGrid extends Control
 		$grid->setRowCallback($this->onRowRender(...));
 
 		return $grid;
-	}
-
-
-	protected function onRowRender(mixed $item, object $html): void
-	{
 	}
 }
