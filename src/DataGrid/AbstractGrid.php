@@ -247,10 +247,10 @@ abstract class AbstractGrid extends Control
 	/**
 	 * @param array<string, mixed> $params
 	 */
-	protected function translate(?string $message, array $params = []): string|Stringable|null
+	protected function translate(?string $message, array $params = []): string|Stringable
 	{
 		if (!$message || !isset($this->translator)) {
-			return $message;
+			return $message ?? '';
 		}
 
 		return $this->translator->translate($message, $params);
