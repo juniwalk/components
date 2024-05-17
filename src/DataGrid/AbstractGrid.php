@@ -223,7 +223,7 @@ abstract class AbstractGrid extends Control
 			$grid->setPrimaryKey($primaryKey);
 		}
 
-		$grid->setDataSource($this->createModel());
+		$grid->setDataSource($this->createModel() ?? []);
 		$grid->setStrictSessionFilterValues(false);
 		$grid->setOuterFilterRendering(true);
 		$grid->setOuterFilterColumnsCount(3);
