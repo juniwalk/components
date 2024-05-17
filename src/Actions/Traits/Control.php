@@ -7,7 +7,7 @@
 
 namespace JuniWalk\Components\Actions\Traits;
 
-use JuniWalk\Components\Actions\Component;
+use JuniWalk\Components\Actions\Component;	// ! Used for @phpstan
 use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Html;
 use Nette\Localization\Translator;
@@ -42,7 +42,7 @@ trait Control
 	}
 
 
-	public function setIcon(?string $icon, bool $fixedWidth = true, Color $color = null): static
+	public function setIcon(?string $icon, bool $fixedWidth = true, ?Color $color = null): static
 	{
 		if (!is_null($icon)) {
 			$icon = Html::icon($icon, $fixedWidth, $color);

@@ -11,6 +11,7 @@ use JuniWalk\Components\Actions\Action;
 use JuniWalk\Components\Actions\Component;
 use JuniWalk\Components\Actions\Traits\Actions;
 use JuniWalk\Components\Actions\Traits\Control;
+use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Html;
 use JuniWalk\Utils\Strings;
 use Nette\Application\UI\Control as UIControl;
@@ -34,6 +35,32 @@ class Dropdown extends UIControl implements Action, Component
 
 		$this->setParent(null, $this->name);
 		$this->addAction($this->btn);
+	}
+
+
+	public function setTitle(?string $title): static
+	{
+		$this->btn->setTitle($title);
+		return $this;
+	}
+
+
+	public function getTitle(): ?string
+	{
+		return $this->btn->getTitle();
+	}
+
+
+	public function setIcon(?string $icon, bool $fixedWidth = true, ?Color $color = null): static
+	{
+		$this->btn->setIcon($icon, $fixedWidth, $color);
+		return $this;
+	}
+
+
+	public function getIcon(): ?Html
+	{
+		return $this->btn->getIcon();
 	}
 
 
@@ -98,7 +125,8 @@ class Dropdown extends UIControl implements Action, Component
 
 	public function create(): Html
 	{
-		$button = $this->getControl()->addClass('dropdown-toggle')
+		$button = $this->getControl()
+			->addClass('dropdown-toggle')
 			->data('toggle', 'dropdown');
 
 		$this->control->addClass('dropdown-menu');
