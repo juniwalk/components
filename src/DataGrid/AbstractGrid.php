@@ -101,6 +101,7 @@ abstract class AbstractGrid extends Control
 
 
 	/**
+	 * @param  class-string<LabeledEnum> $enum
 	 * @throws UnexpectedValueException
 	 */
 	public function addColumnEnum(string $name, string $title, string $enum, bool $blockButtons = false): Column
@@ -110,18 +111,18 @@ abstract class AbstractGrid extends Control
 		}
 
 		$signalMethod = $this->formatSignalMethod($name);
-		$blockButtons = $blockButtons ? null : false;
+		$class = $blockButtons ? 'btn-block text-right' : null;
 
 		if (!method_exists($this, $signalMethod)) {
 			return $this->grid->addColumnText($name, $title)->setAlign('right')
-				->setRenderer(function($item) use ($name, $enum, $blockButtons): ?Html {
+				->setRenderer(function($item) use ($name, $enum, $class): ?Html {
 					if (!$value = $this->getRow($item)->getValue($name)) {
 						return null;
 					}
 
-					/** @phpstan-ignore-next-line */
-					return Html::badgeEnum($enum::make($value))
-						->addClass($blockButtons ?? 'd-block text-right');
+					/** @var int|string|LabeledEnum|null $value */
+					return Html::badgeEnum($enum::make($value))		// @phpstan-ignore return.type
+						->addClass($class);
 				});
 		}
 
@@ -130,11 +131,9 @@ abstract class AbstractGrid extends Control
 		$column->onChange[] = fn($id, $value) => $this->$signalMethod((int) $id, $enum::make($value));
 
 		foreach ($enum::cases() as $item) {
-			$class = $blockButtons ?? ' btn-block text-right';
-			$class .= ($item->color() ?? Color::Secondary)->for('btn');
-
+			$color = ($item->color() ?? Color::Secondary)->for('btn');	// @phpstan-ignore-line v3.0 utils had color() method return null.
 			$option = $column->addOption($item->value, $item->label())
-				->setClass($class);
+				->setClass($class.' '.$color);
 
 			if ($icon = $item->icon()) {
 				$option->setIcon($icon)->setIconSecondary($icon);

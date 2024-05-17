@@ -90,7 +90,7 @@ class LatteExtension extends Extension
 		bool $isColored = true,
 		string ...$classes,
 	): Html {
-		if (is_string($currency) && method_exists(Currency::class, 'remake')) { // @phpstan-ignore-line
+		if (is_string($currency) && method_exists(Currency::class, 'remake')) {
 			/** @var CurrencyInterface */
 			$currency = Currency::remake($currency);
 		}
