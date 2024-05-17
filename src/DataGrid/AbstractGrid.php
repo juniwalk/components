@@ -20,13 +20,14 @@ use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\DataSource\DoctrineDataSource;
 use Ublaboo\DataGrid\Row;
 use UnexpectedValueException;
+use Stringable;
 
 abstract class AbstractGrid extends Control
 {
 	protected const TemplatesDir = __DIR__.'/templates';
 
 	protected DataGrid $grid;
-	protected ?Translator $translator = null;
+	protected Translator $translator;
 	protected bool $hasFiltersAlwaysShown = true;
 	protected bool $hasColumnsFixedWidth = false;
 	protected bool $isDisabled = false;
@@ -81,7 +82,7 @@ abstract class AbstractGrid extends Control
 	}
 
 
-	public function setTranslator(?Translator $translator = null): void
+	public function setTranslator(Translator $translator): void
 	{
 		$this->translator = $translator;
 	}
@@ -89,7 +90,7 @@ abstract class AbstractGrid extends Control
 
 	public function getTranslator(): ?Translator
 	{
-		return $this->translator;
+		return $this->translator ?? null;
 	}
 
 
@@ -232,7 +233,6 @@ abstract class AbstractGrid extends Control
 			$grid->setTranslator($this->translator);
 		}
 
-		// TODO: Remove in the future as this is in the template
 		DataGrid::$iconPrefix = 'fas fa-fw fa-';
 
 		if (($dataSource = $grid->getDataSource()) instanceof DoctrineDataSource) {
@@ -242,5 +242,18 @@ abstract class AbstractGrid extends Control
 		$grid->setRowCallback($this->onRowRender(...));
 
 		return $grid;
+	}
+
+
+	/**
+	 * @param array<string, mixed> $params
+	 */
+	protected function translate(?string $message, array $params = []): string|Stringable|null
+	{
+		if (!$message || !isset($this->translator)) {
+			return $message;
+		}
+
+		return $this->translator->translate($message, $params);
 	}
 }
