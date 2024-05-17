@@ -7,20 +7,31 @@
 
 namespace JuniWalk\Components\Actions\Traits;
 
+use JuniWalk\Components\Actions\LinkProvider;	// ! Used for @phpstan
 use Nette\Application\UI\Component;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Link;
 
+/**
+ * @phpstan-import-type LinkArgs from LinkProvider
+ */
 trait Links
 {
+	/** @var LinkArgs */
 	private array $linkArgs = [];
 
+	/**
+	 * @param LinkArgs $args
+	 */
 	public function setLinkArgs(array $args): void
 	{
 		$this->linkArgs = $args;
 	}
 
 
+	/**
+	 * @return LinkArgs
+	 */
 	public function getLinkArgs(): array
 	{
 		return $this->linkArgs;
@@ -28,6 +39,7 @@ trait Links
 
 
 	/**
+	 * @param  LinkArgs $args
 	 * @throws InvalidLinkException
 	 */
 	public function createLink(Link|string $dest, array $args = []): Link|string

@@ -20,6 +20,9 @@ use Nette\Application\UI\Presenter;
 use Nette\Utils\Random;
 use Stringable;
 
+/**
+ * @phpstan-import-type LinkArgs from LinkProvider
+ */
 trait Actions
 {
 	public function addGroup(?string $name = null): Group
@@ -30,7 +33,7 @@ trait Actions
 
 
 	/**
-	 * @param array<string, scalar> $args
+	 * @param LinkArgs $args
 	 */
 	public function addButton(string $name, Stringable|string|null $label = null, Link|string|null $dest = null, array $args = []): Button
 	{

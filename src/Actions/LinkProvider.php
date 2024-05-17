@@ -9,10 +9,13 @@ namespace JuniWalk\Components\Actions;
 
 use Nette\Application\UI\Link;
 
+/**
+ * @phpstan-type LinkArgs array<string, mixed>
+ */
 interface LinkProvider
 {
 	/**
-	 * @param array<string, scalar> $args
+	 * @param LinkArgs $args
 	 */
 	public function createLink(Link|string $dest, array $args = []): Link|string;
 }
