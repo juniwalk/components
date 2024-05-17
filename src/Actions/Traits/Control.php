@@ -42,9 +42,13 @@ trait Control
 	}
 
 
-	public function setIcon(string $icon, bool $fixedWidth = true, Color $color = null): static
+	public function setIcon(?string $icon, bool $fixedWidth = true, Color $color = null): static
 	{
-		$this->icon = Html::icon($icon, $fixedWidth, $color);
+		if (!is_null($icon)) {
+			$icon = Html::icon($icon, $fixedWidth, $color);
+		}
+
+		$this->icon = $icon;
 		return $this;
 	}
 
