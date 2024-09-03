@@ -66,18 +66,19 @@ class LatteExtension extends Extension
 
 
 	protected function filterBadge(
-		string|LabeledEnum $content,
+		string|LabeledEnum|null $content,
 		string|Color $color = Color::Secondary,
-		string $icon = null,
-	): Html {
-		/** @var Color */
-		$color = Color::make($color);
+		?string $icon = null,
+	): ?Html {
+		if (empty($content)) {
+			return null;
+		}
 
 		if ($content instanceof LabeledEnum) {
 			return Html::badgeEnum($content);
 		}
 
-		return Html::badge($content, $color, $icon);
+		return Html::badge($content, Color::make($color), $icon);
 	}
 
 
