@@ -204,7 +204,7 @@ class LatteExtension extends Extension
 		string ...$classes,
 	): Html {
 		$icon = Html::icon($icon, true, Color::make($color));
-		$html = Html::el('button type="button" class="btn btn-link p-0 mb-1"')
+		$html = Html::el('button type="button" class="btn btn-link p-0 mt-n2"')
 			->title($icon.' '.$this->translator->translate($title))
 			->data('toggle', 'popover')->data('trigger', 'focus')
 			->data('content', $content)
