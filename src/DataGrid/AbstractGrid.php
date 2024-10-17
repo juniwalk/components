@@ -32,6 +32,7 @@ abstract class AbstractGrid extends Control
 	protected bool $hasColumnsFixedWidth = false;
 	protected bool $isDisabled = false;
 	protected ?string $title = null;
+	protected ?string $help = null;
 
 
 	public function setDisabled(bool $disabled = true): void
@@ -79,6 +80,18 @@ abstract class AbstractGrid extends Control
 	public function getTitle(): ?string
 	{
 		return $this->title;
+	}
+
+
+	public function setHelp(?string $help): void
+	{
+		$this->help = $help;
+	}
+
+
+	public function getHelp(): ?string
+	{
+		return $this->help;
 	}
 
 
@@ -184,6 +197,7 @@ abstract class AbstractGrid extends Control
 		$gridTemplate->hasFiltersAlwaysShown = $this->hasFiltersAlwaysShown;
 		$gridTemplate->isDisabled = $this->isDisabled;
 		$gridTemplate->title = $this->title;
+		$gridTemplate->help = $this->help;
 
 		$template = $this->getTemplate();
 		$template->setFile(static::TemplatesDir.'/datagrid-wrapper.latte');

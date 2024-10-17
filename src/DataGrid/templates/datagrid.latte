@@ -4,7 +4,10 @@
 <form n:name="filter" class="ajax">
 
 	<div class="card-header border-0 py-1 d-flex flex-wrap align-items-center" n:ifcontent>
-		<h3 class="card-title flex-grow-1 py-2" n:if="$title">{$title|translate:[name => $controlName]|noescape}</h3>
+		<h3 class="card-title flex-grow-1 py-2" n:if="$title">
+			{$title|translate:[name => $controlName]|noescape} 
+			{if $help}{$help|translate|markdown|popover:$title}{/if}
+		</h3>
 		<div class="card-tools btn-toolbar py-2" n:ifcontent>
 
 			<div class="btn-group mr-2 datagrid-exports" n:if="$exports" n:block="exports" n:inner-foreach="$exports as $export">
