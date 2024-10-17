@@ -20,7 +20,6 @@ use JuniWalk\Utils\Strings;
 use Latte\ContentType;
 use Latte\Extension;
 use Latte\Runtime\FilterInfo;
-use League\CommonMark\ConverterInterface;
 use League\CommonMark\GithubFlavoredMarkdownConverter as MarkdownConverter;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\InvalidLinkException;
@@ -31,8 +30,6 @@ use UnexpectedValueException;
 class LatteExtension extends Extension
 {
 	protected const LinkPattern = '/\[(?<label>.+)\]\((?<value>.+)\)/iU';
-
-	protected readonly ConverterInterface $markdown;
 
 	public function __construct(
 		protected readonly Translator $translator,
@@ -163,7 +160,7 @@ class LatteExtension extends Extension
 			$html->addClass('hljs');
 		}
 
-		$highlight = (new Highlighter)->highlight($lang, $code);
+		$highlight = (new Highlighter)->highlight($lang ?? 'html', $code ?? '');
 		$info->contentType = ContentType::Html;
 
 		/** @var Html */
