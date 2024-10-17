@@ -39,5 +39,10 @@
 		"staabm/phpstan-todo-by": "^0.1",
 		"tracy/tracy": "^2.10",
 		"ublaboo/datagrid": "^6.10"
-	}
+	},
+
+    "suggest": {
+		"scrivo/highlight.php": "For 'syntaxHighlight' latte extension filter.",
+		"league/commonmark": "For 'markdown' latte extension filter."
+    }
 }
