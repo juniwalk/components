@@ -31,7 +31,7 @@ abstract class AbstractGrid extends Control
 	protected bool $hasFiltersAlwaysShown = true;
 	protected bool $hasColumnsFixedWidth = false;
 	protected bool $isDisabled = false;
-	protected ?string $title = null;
+	protected Stringable|string|null $title = null;
 	protected ?string $help = null;
 
 
@@ -71,13 +71,13 @@ abstract class AbstractGrid extends Control
 	}
 
 
-	public function setTitle(?string $title): void
+	public function setTitle(Stringable|string|null $title): void
 	{
 		$this->title = $title;
 	}
 
 
-	public function getTitle(): ?string
+	public function getTitle(): Stringable|string|null
 	{
 		return $this->title;
 	}
@@ -259,7 +259,7 @@ abstract class AbstractGrid extends Control
 	/**
 	 * @param array<string, mixed> $params
 	 */
-	protected function translate(?string $message, array $params = []): string|Stringable
+	protected function translate(Stringable|string|null $message, array $params = []): Stringable|string
 	{
 		if (!$message || !isset($this->translator)) {
 			return $message ?? '';
