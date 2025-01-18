@@ -48,6 +48,7 @@ class LatteExtension extends Extension
 			'phone' => $this->filterPhone(...),
 			'badge' => $this->filterBadge(...),
 			'price' => $this->filterPrice(...),
+			'money' => $this->filterMoney(...),
 			'icon' => $this->filterIcon(...),
 			'popover' => $this->filterPopover(...),
 			'markdown' => $this->filterMarkdown(...),
@@ -133,6 +134,28 @@ class LatteExtension extends Extension
 
 		/** @var Html */
 		return Html::price((float) $amount, $currency, isColoredBySign: $isColored)->addClass($classes);
+	}
+
+
+	/**
+	 * @throws UnexpectedValueException
+	 */
+	protected function filterMoney(
+		FilterInfo $info,
+		?float $amount,
+		string|CurrencyInterface $currency,
+		bool $localeAware = true,
+	): string {
+		if (is_string($currency) && method_exists(Currency::class, 'remake')) {
+			/** @var CurrencyInterface */
+			$currency = Currency::remake($currency);
+		}
+
+		if (is_string($currency)) {
+			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class);
+		}
+
+		return Format::price((float) $amount, $currency, localeAware: $localeAware);
 	}
 
 
