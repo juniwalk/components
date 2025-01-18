@@ -49,6 +49,7 @@ class LatteExtension extends Extension
 			'badge' => $this->filterBadge(...),
 			'price' => $this->filterPrice(...),
 			'money' => $this->filterMoney(...),
+			'numeric' => $this->filterNumeric(...),
 			'icon' => $this->filterIcon(...),
 			'popover' => $this->filterPopover(...),
 			'markdown' => $this->filterMarkdown(...),
@@ -156,6 +157,21 @@ class LatteExtension extends Extension
 		}
 
 		return Format::price((float) $amount, $currency, localeAware: $localeAware);
+	}
+
+
+	/**
+	 * @template T of mixed
+	 * @param  T $value
+	 * @return ($strict is true ? int|float|null : T)
+	 */
+	protected function filterNumeric(
+		FilterInfo $info,
+		mixed $value,
+		?int $precision = null,
+		bool $strict = true,
+	): mixed {
+		return Format::numeric($value, $precision, $strict);
 	}
 
 
