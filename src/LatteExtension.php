@@ -145,6 +145,7 @@ class LatteExtension extends Extension
 		FilterInfo $info,
 		?float $amount,
 		string|CurrencyInterface $currency,
+		int $decimals = 2,
 		bool $localeAware = true,
 	): string {
 		if (is_string($currency) && method_exists(Currency::class, 'remake')) {
@@ -156,7 +157,7 @@ class LatteExtension extends Extension
 			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class);
 		}
 
-		return Format::price((float) $amount, $currency, localeAware: $localeAware);
+		return Format::price((float) $amount, $currency, $decimals, $localeAware);
 	}
 
 
