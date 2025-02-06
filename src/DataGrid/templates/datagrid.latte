@@ -1,4 +1,5 @@
-<div class="card card-outline card-secondary datagrid datagrid-{$controlName} p-0" data-refresh-state="{link refreshState!}" n:snippet="grid">
+<div n:snippet="grid">
+<div class="card card-outline card-secondary datagrid datagrid-{$controlName} p-0" data-refresh-state="{link refreshState!}">
 {snippetArea gridSnippets}
 
 <form n:name="filter" class="ajax">
@@ -283,6 +284,7 @@
 	</div>
 
 {/snippetArea}
+</div>
 </div>
 
 {define inlineAddRow}
