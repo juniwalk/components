@@ -30,6 +30,7 @@
 	},
 
 	"require-dev": {
+		"contributte/translation": "^2.0",
 		"doctrine/orm": "^2.0",
 		"latte/latte": "^3.0",
 		"league/commonmark": "^2.0",

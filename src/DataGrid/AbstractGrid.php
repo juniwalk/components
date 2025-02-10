@@ -7,6 +7,7 @@
 
 namespace JuniWalk\Components\DataGrid;
 
+use Contributte\Translation\Wrappers\Message;
 use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Enums\Interfaces\LabeledEnum;
 use JuniWalk\Utils\Html;
@@ -71,15 +72,16 @@ abstract class AbstractGrid extends Control
 	}
 
 
-	public function setTitle(Stringable|string|null $title): void
+	/**
+	 * @param mixed[] $params
+	 */
+	public function setTitle(Stringable|string|null $title, ?array $params = null): void
 	{
+		if ($title && !empty($params) && class_exists(Message::class)) {
+			$title = new Message((string) $title, $params);
+		}
+
 		$this->title = $title;
-	}
-
-
-	public function getTitle(): Stringable|string|null
-	{
-		return $this->title;
 	}
 
 
