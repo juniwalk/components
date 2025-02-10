@@ -77,7 +77,7 @@ abstract class AbstractGrid extends Control
 	 */
 	public function setTitle(Stringable|string|null $title, ?array $params = null): void
 	{
-		if ($title && !empty($params) && class_exists(Message::class)) {
+		if ($title && !is_null($params) && class_exists(Message::class)) {
 			$title = new Message((string) $title, $params);
 		}
 
