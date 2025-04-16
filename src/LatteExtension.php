@@ -26,6 +26,7 @@ use Nette\Application\UI\InvalidLinkException;
 use Nette\Localization\Translator;
 use Stringable;
 use UnexpectedValueException;
+use ValueError;
 
 class LatteExtension extends Extension
 {
@@ -122,13 +123,10 @@ class LatteExtension extends Extension
 		bool $isColored = true,
 		string ...$classes,
 	): Html {
-		if (is_string($currency) && method_exists(Currency::class, 'remake')) {
-			/** @var CurrencyInterface */
+		try {
 			$currency = Currency::remake($currency);
-		}
-
-		if (is_string($currency)) {
-			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class);
+		} catch (ValueError $e) {
+			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class, previous: $e);
 		}
 
 		$info->contentType = ContentType::Html;
@@ -148,13 +146,10 @@ class LatteExtension extends Extension
 		int $decimals = 2,
 		bool $localeAware = true,
 	): string {
-		if (is_string($currency) && method_exists(Currency::class, 'remake')) {
-			/** @var CurrencyInterface */
+		try {
 			$currency = Currency::remake($currency);
-		}
-
-		if (is_string($currency)) {
-			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class);
+		} catch (ValueError $e) {
+			throw new UnexpectedValueException('Currency has to be instance of '.CurrencyInterface::class, previous: $e);
 		}
 
 		return Format::price((float) $amount, $currency, $decimals, $localeAware);

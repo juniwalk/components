@@ -6,3 +6,6 @@ parameters:
 
 	todo_by:
 		referenceVersion: "nextMinor"
+
+	ignoreErrors:
+		- [identifier: trait.unused]

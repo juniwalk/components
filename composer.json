@@ -26,22 +26,22 @@
 
 	"require": {
 		"php": ">=8.2",
-		"juniwalk/utils": "^3.0|^4.0"
+		"juniwalk/utils": "^4.0"
 	},
 
 	"require-dev": {
 		"contributte/translation": "^2.0",
-		"doctrine/orm": "^2.0",
+		"doctrine/orm": "^2.0|^3.0",
 		"latte/latte": "^3.0",
 		"league/commonmark": "^2.0",
 		"nette/tester": "^2.5",
 		"phpstan/extension-installer": "^1.0",
-		"phpstan/phpstan": "^1.0",
-		"phpstan/phpstan-nette": "^1.0",
+		"phpstan/phpstan": "^2.0",
+		"phpstan/phpstan-nette": "^2.0",
 		"scrivo/highlight.php": "^9.0",
-		"staabm/phpstan-todo-by": "^0.1",
+		"staabm/phpstan-todo-by": "^0.2",
 		"tracy/tracy": "^2.10",
-		"ublaboo/datagrid": "^6.10"
+		"ublaboo/datagrid": "dev-master"
 	},
 
     "suggest": {

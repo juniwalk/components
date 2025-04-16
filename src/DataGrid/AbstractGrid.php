@@ -242,7 +242,7 @@ abstract class AbstractGrid extends Control
 		$grid->setOuterFilterRendering(true);
 		$grid->setOuterFilterColumnsCount(3);
 
-		if ($this->translator instanceof Translator) {
+		if (isset($this->translator)) {
 			$grid->setTranslator($this->translator);
 		}
 

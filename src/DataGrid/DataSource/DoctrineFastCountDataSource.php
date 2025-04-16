@@ -8,12 +8,11 @@
 namespace JuniWalk\Components\DataGrid\DataSource;
 
 use Doctrine\DBAL\Exception as DBALException;
-use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\DataSource\DoctrineDataSource;
 
 /**
- * @method void onDataLoaded(array $result)
+ * @inheritDoc
  */
 final class DoctrineFastCountDataSource extends DoctrineDataSource
 {
@@ -32,7 +31,7 @@ final class DoctrineFastCountDataSource extends DoctrineDataSource
 		$connection = $entityManager->getConnection();
 		$platform = $connection->getDatabasePlatform();
 
-		if ($this->isFiltered() || empty($entityNames) || !$platform instanceof PostgreSQL94Platform) {
+		if ($this->isFiltered() || empty($entityNames)) {
 			// return $this->calculateSlidingCount();
 			return parent::getCount();
 		}

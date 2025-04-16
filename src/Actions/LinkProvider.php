@@ -8,11 +8,12 @@
 namespace JuniWalk\Components\Actions;
 
 use Nette\Application\UI\Link;
+use Nette\ComponentModel\IComponent;
 
 /**
  * @phpstan-type LinkArgs array<string, mixed>
  */
-interface LinkProvider
+interface LinkProvider extends IComponent
 {
 	/**
 	 * @param LinkArgs $args
