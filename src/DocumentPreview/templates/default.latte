@@ -1,0 +1,49 @@
+<div class="modal fade" id="{$control->getName()}" n:attr="...$modalOptions" tabindex="-1">
+<div class="modal-dialog document-preview">
+
+	<div class="modal-content">
+
+		<div class="modal-header bg-gray-dark">
+
+			<h4 class="modal-title"><i n:ifset="$icon" class="{$icon}"></i> {$title|translate|noescape}</h4>
+
+			<div class="card-tools btn-toolbar align-self-center" n:snippet="toolbar">
+				<div class="btn-group mr-2" n:if="$actions" n:inner-foreach="$actions as $action">
+					{control $action}
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-sm btn-secondary" data-dismiss="modal" data-tooltip title="{_web.button.frame-close|stripHtml|trim}">{_web.button.frame-close|noescape}</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="modal-body document" n:snippet="content">
+
+			<iframe id="windowFrame" n:attr="src => $frameUrl"
+				allowTransparency="true"
+				frameBorder="0"
+				width="100%">
+			</iframe>
+
+			<div class="loading">
+				<i class="fas fa-rotate fa-spin fa-5x fa-fw"></i>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script type="text/javascript">iframeResize({ license: {$license ?? 'GPLv3'} }, '#windowFrame');</script>
+	<script type="text/javascript">
+		function printFrame() {
+			let frame = document.getElementById('windowFrame').contentWindow;
+			frame.focus();
+			frame.print();
+
+			naja.makeRequest('GET', {$control->link('print!')}, { }, { history: false });
+		}
+	</script>
+
+</div>
+</div>

@@ -1,0 +1,25 @@
+
+/**
+ * @copyright Martin Procházka (c) 2025
+ * @license   MIT License
+ */
+
+.document-preview { max-width: 210mm; }
+.document-preview .document { min-height: 297mm; padding: 0px; }
+
+.document-preview iframe {
+	position: relative;
+	margin-bottom: -5px;
+	z-index: 1;
+	min-height: 297mm;
+}
+
+.document-preview .loading {
+	position: absolute;
+	color: rgba(90, 90, 90, .5);
+	top: 90mm;
+	left: 0px;
+	right: 0px;
+	text-align: center;
+	z-index: 0;
+}
