@@ -16,6 +16,7 @@ use JuniWalk\Utils\Interfaces\EventHandler;
 use JuniWalk\Utils\Interfaces\Modal;
 use JuniWalk\Utils\Strings;
 use JuniWalk\Utils\Traits\Events;
+use JuniWalk\Utils\Traits\RedirectAjaxHandler;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\FileResponse;
 use Nette\Application\UI\Control;
@@ -28,7 +29,7 @@ use Throwable;
  */
 class DocumentPreview extends Control implements EventHandler, Modal, LinkProvider
 {
-	use Actions, Links, Events;
+	use Actions, Links, Events, RedirectAjaxHandler;
 
 	private string $title;
 	private string $icon;
