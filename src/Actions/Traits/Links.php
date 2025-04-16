@@ -44,21 +44,20 @@ trait Links
 	 */
 	public function createLink(Link|string $dest, array $args = []): Link|string
 	{
-		$args = array_merge($args, $this->linkArgs);
-
-		if (str_starts_with($dest, 'javascript:') ||
+		if ($dest instanceof Link ||
 			str_starts_with($dest, '#') ||
-			$dest instanceof Link) {
+			str_starts_with($dest, 'javascript:')) {
 			return $dest;
 		}
 
 		$presenter = $this->getPresenter();
-		$linkMode = $presenter->invalidLinkMode;
+		$args = array_merge($args, $this->linkArgs);	// ? Maybe $args should take precedence?
 
 		if (str_contains($dest, ':')) {
 			return $presenter->link($dest, $args);
 		}
 
+		$invalidLinkMode = $presenter->invalidLinkMode;
 		$presenter->invalidLinkMode = $presenter::InvalidLinkException;
 		$component = $this;
 
@@ -74,7 +73,7 @@ trait Links
 				continue;
 
 			} finally {
-				$presenter->invalidLinkMode = $linkMode;
+				$presenter->invalidLinkMode = $invalidLinkMode;
 			}
 
 		} while ($component = $component->getParent());
