@@ -75,7 +75,7 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 	public function handlePrint(): void
 	{
-		$this->trigger('print', $this);
+		$this->trigger('print', $this, $this->params);
 		$this->redirect('this');
 	}
 
@@ -95,14 +95,14 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 		);
 
 		try {
-			$frameUrl = $this->createFrameUrl();
+			$frameUrl = $this->createUrl($this->frameUrl);
 			$file = new FileResponse(
 				$this->googleChrome->covert($frameUrl),
 				$this->params['file'] ?? $fileName,
 				'application/pdf',
 			);
 
-			$this->trigger('download', $this);
+			$this->trigger('download', $this, $this->params);
 
 		} catch (Throwable $e) {
 			throw new BadRequestException('Failed to create PDF file.', previous: $e);
@@ -142,7 +142,8 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 		$this->trigger('render', $this, $template);
 
-		$template->add('frameUrl', $this->createFrameUrl());
+		$template->add('frameUrl', $this->createUrl($this->frameUrl));
+		$template->add('printUrl', $this->createUrl('print!'));
 		$template->add('actions', $this->getActions());
 		$template->add('title', $this->title);
 		$template->add('icon', $this->icon);
@@ -155,8 +156,8 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 	}
 
 
-	private function createFrameUrl(): string|Link
+	private function createUrl(string|Link $url): string|Link
 	{
-		return $this->createLink($this->frameUrl, $this->params ?: $this->getLinkArgs());
+		return $this->createLink($url, $this->params ?: $this->getLinkArgs());
 	}
 }
