@@ -75,7 +75,7 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 	public function handlePrint(): void
 	{
-		$this->trigger('print', $this, $this->params);
+		$this->trigger('print', $this, $this->getParameters());
 		$this->redirect('this');
 	}
 
@@ -83,32 +83,30 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 	/**
 	 * @throws BadRequestException
 	 */
-	public function handleDownload(): void
+	public function handleDownload(?string $fileName): void
 	{
 		if (!isset($this->frameUrl)) {
 			throw new BadRequestException('FrameUrl is not set.');
 		}
 
 		$presenter = $this->getPresenter();
-		$fileName = Strings::webalize(
-			$presenter->getAction(true)
-		);
+		$pageName = $presenter->getAction(true);
 
 		try {
 			$frameUrl = $this->createUrl($this->frameUrl);
-			$file = new FileResponse(
+			$response = new FileResponse(
 				$this->googleChrome->covert($frameUrl),
-				$this->params['file'] ?? $fileName,
+				$fileName ?? Strings::webalize($pageName),
 				'application/pdf',
 			);
 
-			$this->trigger('download', $this, $this->params);
+			$this->trigger('download', $this, $this->getParameters());
 
 		} catch (Throwable $e) {
 			throw new BadRequestException('Failed to create PDF file.', previous: $e);
 		}
 
-		$presenter->sendResponse($file);
+		$presenter->sendResponse($response);
 	}
 
 
@@ -158,6 +156,6 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 	private function createUrl(string|Link $url): string|Link
 	{
-		return $this->createLink($url, $this->params ?: $this->getLinkArgs());
+		return $this->createLink($url, $this->getParameters() ?: $this->getLinkArgs());
 	}
 }
