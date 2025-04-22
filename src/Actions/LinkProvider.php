@@ -18,5 +18,5 @@ interface LinkProvider extends IComponent
 	/**
 	 * @param LinkArgs $args
 	 */
-	public function createLink(Link|string $dest, array $args = []): Link|string;
+	public function createLink(Link|string $dest, array $args = [], bool $lazy = false): Link|string;
 }

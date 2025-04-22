@@ -40,21 +40,24 @@ trait Links
 
 	/**
 	 * @param  LinkArgs $args
+	 * @return ($lazy is true ? Link : Link|string)
 	 * @throws InvalidLinkException
 	 */
-	public function createLink(Link|string $dest, array $args = []): Link|string
+	public function createLink(Link|string $dest, array $args = [], bool $lazy = false): Link|string
 	{
 		if ($dest instanceof Link ||
 			str_starts_with($dest, '#') ||
 			str_starts_with($dest, 'javascript:')) {
+			// ! Will return string for javascript links in lazy mode
 			return $dest;
 		}
 
 		$presenter = $this->getPresenter();
+		$method = $lazy ? 'lazyLink' : 'link';
 		$args = array_merge($args, $this->linkArgs);	// ? Maybe $args should take precedence?
 
 		if (str_contains($dest, ':')) {
-			return $presenter->link($dest, $args);
+			return $presenter->$method($dest, $args);
 		}
 
 		$invalidLinkMode = $presenter->invalidLinkMode;
@@ -67,7 +70,7 @@ trait Links
 					break;
 				}
 
-				return $component->link($dest, $args);
+				return $component->$method($dest, $args);
 
 			} catch (InvalidLinkException) {
 				continue;
