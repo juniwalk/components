@@ -14,14 +14,17 @@ use JuniWalk\Utils\Format;
 use JuniWalk\Utils\GoogleChrome;
 use JuniWalk\Utils\Interfaces\EventHandler;
 use JuniWalk\Utils\Interfaces\Modal;
+use JuniWalk\Utils\Interfaces\TokenProvider;
 use JuniWalk\Utils\Strings;
 use JuniWalk\Utils\Traits\Events;
 use JuniWalk\Utils\Traits\RedirectAjaxHandler;
+use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
-use Nette\Application\Responses\FileResponse;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Link;
 use Nette\Bridges\ApplicationLatte\DefaultTemplate;
+use Nette\Security\IIdentity as Identity;
+use Tracy\Debugger;
 use Throwable;
 
 /**
@@ -38,6 +41,7 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 	public function __construct(
 		private readonly GoogleChrome $googleChrome,
+		private readonly ?Identity $user = null,
 	) {
 		$this->watch('download');
 		$this->watch('render');
@@ -58,12 +62,12 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 
 	/**
-	 * @param LinkArgs $params
+	 * @param LinkArgs $args
 	 */
-	public function setFrameUrl(string|Link $frameUrl, array $params = []): void
+	public function setFrameUrl(string|Link $frameUrl, array $args = []): void
 	{
 		$this->frameUrl = $frameUrl;
-		$this->setLinkArgs($params);
+		$this->setLinkArgs($args);
 	}
 
 
@@ -85,28 +89,39 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 	 */
 	public function handleDownload(?string $fileName): void
 	{
-		if (!isset($this->frameUrl)) {
-			throw new BadRequestException('FrameUrl is not set.');
-		}
+		$params = $this->getParameters();
+		$parent = $this->getPresenter();
 
-		$presenter = $this->getPresenter();
-		$pageName = $presenter->getAction(true);
+		if (!$parent instanceof TokenProvider) {
+			throw new BadRequestException('Presenter needs to implement '.TokenProvider::class);
+		}
 
 		try {
-			$frameUrl = $this->createUrl($this->frameUrl);
-			$response = new FileResponse(
-				$this->googleChrome->covert($frameUrl),
-				$fileName ?? Strings::webalize($pageName),
-				'application/pdf',
-			);
+			$token = $parent->createToken($this->frameUrl, $params, $this->user);
+			$frameUrl = $parent->lazyLink($this->frameUrl, $params);
+			$frameUrl->setParameter('token', $token);
 
-			$this->trigger('download', $this, $this->getParameters());
+			$fileName ??= Strings::webalize($frameUrl->getDestination());
+			$file = $this->googleChrome->downloadPdf($frameUrl, $fileName);
+
+			$this->trigger('download', $this, $params);
+
+			$parent->sendResponse($file);
+
+		} catch (AbortException $e) {
+			throw $e;
 
 		} catch (Throwable $e) {
-			throw new BadRequestException('Failed to create PDF file.', previous: $e);
+			$parent->flashMessage('web.message.something-went-wrong', 'danger');
+			Debugger::log($e);
+
+		} finally {
+			$parent->clearToken($token);
 		}
 
-		$presenter->sendResponse($response);
+		$parent->redrawControl('controls');
+		$parent->redrawControl('modals');
+		$parent->redirect('this');
 	}
 
 
@@ -140,8 +155,8 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 		$this->trigger('render', $this, $template);
 
-		$template->add('frameUrl', $this->createUrl($this->frameUrl));
-		$template->add('printUrl', $this->createUrl('print!'));
+		$template->add('frameUrl', $this->createLink($this->frameUrl));
+		$template->add('printUrl', $this->createLink('print!'));
 		$template->add('actions', $this->getActions());
 		$template->add('title', $this->title);
 		$template->add('icon', $this->icon);
@@ -151,11 +166,5 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 		}
 
 		$template->render();
-	}
-
-
-	private function createUrl(string|Link $url): string|Link
-	{
-		return $this->createLink($url, $this->getParameters() ?: $this->getLinkArgs());
 	}
 }

@@ -7,7 +7,9 @@
 
 namespace JuniWalk\Components\DocumentPreview;
 
+use Nette\Security\IIdentity as Identity;
+
 interface DocumentFactory
 {
-	public function create(): DocumentPreview;
+	public function create(?Identity $user = null): DocumentPreview;
 }
