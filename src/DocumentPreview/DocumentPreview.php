@@ -98,7 +98,7 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 		try {
 			$token = $parent->createToken($this->frameUrl, $params, $this->user);
-			$frameUrl = $parent->lazyLink($this->frameUrl, $params);
+			$frameUrl = $this->createLink($this->frameUrl, $params, true);
 			$frameUrl->setParameter('token', $token);
 
 			$fileName ??= Strings::webalize($frameUrl->getDestination());
@@ -116,7 +116,7 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 			Debugger::log($e);
 
 		} finally {
-			$parent->clearToken($token);
+			$parent->clearToken($token ?? null);
 		}
 
 		$parent->redrawControl('controls');
