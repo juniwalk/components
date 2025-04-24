@@ -5,7 +5,7 @@
 
 		<div class="modal-header bg-gray-dark">
 
-			<h4 class="modal-title"><i n:ifset="$icon" class="{$icon}"></i> {$title|translate|noescape}</h4>
+			<h4 class="modal-title">{$title|translate|noescape}</h4>
 
 			<div class="card-tools btn-toolbar align-self-center" n:snippet="toolbar">
 				<div class="btn-group mr-2" n:if="$actions" n:inner-foreach="$actions as $action">

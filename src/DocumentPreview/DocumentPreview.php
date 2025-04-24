@@ -35,7 +35,6 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 	use Actions, Links, Events, RedirectAjaxHandler;
 
 	private string $title;
-	private string $icon;
 	private string|Link $frameUrl;
 	private bool $isModalOpen = false;
 
@@ -52,12 +51,6 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 	public function setTitle(string $title): void
 	{
 		$this->title = $title;
-	}
-
-
-	public function setIcon(string $icon): void
-	{
-		$this->icon = $icon;
 	}
 
 
@@ -159,7 +152,6 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 		$template->add('printUrl', $this->createLink('print!'));
 		$template->add('actions', $this->getActions());
 		$template->add('title', $this->title);
-		$template->add('icon', $this->icon);
 
 		if (defined('IframeResizeLicence')) {
 			$template->add('license', IframeResizeLicence);
