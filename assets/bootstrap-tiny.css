@@ -4,7 +4,12 @@
  * @license   MIT License
  */
 
-:root {
+/**
+ * ====================================
+ * COLORS
+ * ====================================
+ */
+ :root {
 	--blue: #007bff;
 	--indigo: #6610f2;
 	--purple: #6f42c1;
@@ -28,6 +33,17 @@
 	--dark: #343a40;
 }
 
+.text-muted { color: var(--secondary); }
+.text-gray-dark { color: var(--gray-dark); }
+
+.bg-light { background-color: var(--light); color: var(--gray-dark); }
+
+
+/**
+ * ====================================
+ * TEXTS
+ * ====================================
+ */
 .text-capitalize { text-transform: capitalize; }
 .text-uppercase { text-transform: uppercase; }
 .text-lowercase { text-transform: lowercase; }
@@ -43,6 +59,26 @@
 .font-2x { font-size: 12pt; }
 .font-4x { font-size: 24pt; }
 
+.text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text-break {
+	word-break: break-word !important;
+	word-wrap: break-word !important;
+}
+
+.text-nowrap { white-space: nowrap !important; }
+.text-wrap { white-space: wrap !important; }
+
+
+/**
+ * ====================================
+ * SIZING
+ * ====================================
+ */
 .w-25 { width: 25%; }
 .w-50 { width: 50%; }
 .w-75 { width: 75%; }
@@ -54,19 +90,6 @@
 	max-width: 100%;
 	height: auto;
 }
-
-.float-right { float: right !important; }
-
-
-/**
- * ====================================
- * COLORS
- * ====================================
- */
-.text-muted { color: var(--secondary); }
-.text-gray-dark { color: var(--gray-dark); }
-
-.bg-light { background-color: var(--light); color: var(--gray-dark); }
 
 
 /**
@@ -94,3 +117,11 @@
 .alert-danger { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
 .alert-warning { color: #856404; background-color: #fff3cd; border-color: #ffeeba; }
 .alert-info { color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; }
+
+
+/**
+ * ====================================
+ * UTILS
+ * ====================================
+ */
+.float-right { float: right !important; }
