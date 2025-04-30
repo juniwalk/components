@@ -57,6 +57,7 @@
 .font-italic { font-style: italic; }
 .font-1x { font-size: 8pt; }
 .font-2x { font-size: 12pt; }
+.font-3x { font-size: 16pt; }
 .font-4x { font-size: 24pt; }
 
 .text-truncate {
