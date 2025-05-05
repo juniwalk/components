@@ -6,19 +6,25 @@
 
 /**
  * ====================================
- * COLORS
+ * COLORS (AdminLTE v3)
  * ====================================
  */
  :root {
+	--blue-light: #3c8dbc;
 	--blue: #007bff;
+	--navy: #001f3f;
 	--indigo: #6610f2;
 	--purple: #6f42c1;
 	--pink: #e83e8c;
+	--maroon: #d81b60;
+	--fuchsia: #f012be;
 	--red: #dc3545;
 	--orange: #fd7e14;
 	--yellow: #ffc107;
 	--green: #28a745;
 	--teal: #20c997;
+	--olive: #3d9970;
+	--lime: #01ff70;
 	--cyan: #17a2b8;
 	--white: #fff;
 	--gray: #6c757d;
@@ -33,10 +39,29 @@
 	--dark: #343a40;
 }
 
-.text-muted { color: var(--secondary); }
-.text-gray-dark { color: var(--gray-dark); }
+.bg-lightblue { background-color: var(--blue-light); color: var(--light); }
+.bg-navy { background-color: var(--navy); color: var(--light); }
+.bg-indigo { background-color: var(--indigo); color: var(--light); }
+.bg-purple { background-color: var(--purple); color: var(--light); }
+.bg-fuchsia { background-color: var(--fuchsia); color: var(--light); }
+.bg-pink { background-color: var(--pink); color: var(--light); }
+.bg-maroon { background-color: var(--maroon); color: var(--light); }
+.bg-orange { background-color: var(--orange); color: var(--dark); }
+.bg-teal { background-color: var(--teal); color: var(--light); }
+.bg-olive { background-color: var(--olive); color: var(--light); }
+.bg-lime { background-color: var(--lime); color: var(--dark); }
 
-.bg-light { background-color: var(--light); color: var(--gray-dark); }
+.bg-primary, .bg-blue { background-color: var(--primary); color: var(--light); }
+.bg-secondary, .bg-gray { background-color: var(--secondary); color: var(--light); }
+.bg-success, .bg-green { background-color: var(--success); color: var(--light); }
+.bg-info, .bg-cyan { background-color: var(--info); color: var(--light); }
+.bg-warning, .bg-yellow { background-color: var(--warning); color: var(--dark); }
+.bg-danger, .bg-red { background-color: var(--danger); color: var(--light); }
+.bg-light { background-color: var(--light); color: var(--dark); }
+.bg-dark, .bg-gray-dark { background-color: var(--dark); color: var(--light); }
+
+.text-secondary, .text-gray, .text-muted { color: var(--secondary); }
+.text-dark, .text-gray-dark { color: var(--dark); }
 
 
 /**
