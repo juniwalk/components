@@ -11,8 +11,9 @@ html, body {
 
 .break-avoid { page-break-inside: avoid; }
 .break-force { page-break-before: always; }
+.break-after { break-after: page; }
 
-.page { break-after: page; }
+.page { height: auto; }
 .page.h-full { height: calc(100% - var(--pagedjs-footnotes-height)); }
 .page .logo { height: 3.2rem; }
 
