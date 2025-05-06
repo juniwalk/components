@@ -11,6 +11,7 @@ html, body {
 
 .break-avoid { page-break-inside: avoid; }
 .break-force { page-break-before: always; }
+.break-before { break-before: page; }
 .break-after { break-after: page; }
 
 .page { height: auto; }
