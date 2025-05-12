@@ -16,7 +16,7 @@ html, body {
 
 .page { height: auto; }
 .page.h-full { height: calc(100% - var(--pagedjs-footnotes-height)); }
-.page .logo { height: 3.2rem; }
+.page .logo { height: 3.2rem; line-height: 3.2rem; margin-bottom: 0px; }
 
 .line-dashed { border-bottom: 1px dashed black; }
 .signature {
