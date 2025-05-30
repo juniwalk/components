@@ -3,16 +3,16 @@
 
 	<div class="modal-content">
 
-		<div class="modal-header bg-gray-dark">
+		<div class="modal-header bg-gray-dark d-flex justify-content-between">
 
 			<h4 class="modal-title">{$title|translate|noescape}</h4>
 
-			<div class="card-tools btn-toolbar align-self-center" n:snippet="toolbar">
-				<div class="btn-group mr-2" n:if="$actions" n:inner-foreach="$actions as $action">
+			<div class="btn-toolbar" n:snippet="toolbar">
+				<div class="btn-group mr-2 me-2" n:if="$actions" n:inner-foreach="$actions as $action">
 					{control $action}
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-sm btn-secondary" data-dismiss="modal" data-tooltip title="{_web.button.frame-close|stripHtml|trim}">{_web.button.frame-close|noescape}</a>
+					<a class="btn btn-sm btn-secondary" data-dismiss="modal" data-bs-dismiss="modal" data-tooltip data-bs-toggle="tooltip" title="{_web.button.frame-close|stripHtml|trim}">{_web.button.frame-close|noescape}</a>
 				</div>
 			</div>
 

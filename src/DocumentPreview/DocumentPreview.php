@@ -126,7 +126,9 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 
 		$this->when('render', fn($x, $y) => $y->setParameters([
 			'modalOptions' => [
+				'data-bs-backdrop' => Format::stringify($backdrop),
 				'data-backdrop' => Format::stringify($backdrop),
+				'data-bs-keyboard' => Format::stringify($keyboard),
 				'data-keyboard' => Format::stringify($keyboard),
 			],
 		]));
