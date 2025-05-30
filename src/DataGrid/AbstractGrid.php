@@ -27,6 +27,9 @@ abstract class AbstractGrid extends Control
 {
 	protected const TemplatesDir = __DIR__.'/templates';
 
+	// Bootstrap5 compatibility
+	public static bool $bs5 = false;
+
 	protected DataGrid $grid;
 	protected Translator $translator;
 	protected bool $hasFiltersAlwaysShown = true;
@@ -200,6 +203,9 @@ abstract class AbstractGrid extends Control
 		$gridTemplate->isDisabled = $this->isDisabled;
 		$gridTemplate->title = $this->title;
 		$gridTemplate->help = $this->help;
+
+		// Bootstrap5 compatibility
+		$gridTemplate->bs5 = static::$bs5;
 
 		$template = $this->getTemplate();
 		$template->setFile(static::TemplatesDir.'/datagrid-wrapper.latte');

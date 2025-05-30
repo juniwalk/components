@@ -1,30 +1,30 @@
 <div n:snippet="grid">
-<div class="card card-outline card-secondary datagrid datagrid-{$controlName} p-0" data-refresh-state="{link refreshState!}">
+<div class="card card-outline card-secondary datagrid datagrid-{$controlName} p-0 mb-3" data-refresh-state="{link refreshState!}">
 {snippetArea gridSnippets}
 
 <form n:name="filter" class="ajax">
 
 	<div class="card-header border-0 py-1 d-flex flex-wrap align-items-center" n:ifcontent>
-		<h3 class="card-title flex-grow-1 py-2" n:if="$title">
+		<h3 class="card-title flex-grow-1 py-2 m-0" n:if="$title">
 			{$title|translate:[name => $controlName]|noescape} 
 			{if $help}{$help|translate|markdown|popover:$title}{/if}
 		</h3>
 		<div class="card-tools btn-toolbar py-2" n:ifcontent>
 
-			<div class="btn-group mr-2 datagrid-exports" n:if="$exports" n:block="exports" n:inner-foreach="$exports as $export">
+			<div class="btn-group mr-2 me-2 datagrid-exports" n:if="$exports" n:block="exports" n:inner-foreach="$exports as $export">
 				{$export->render()}
 			</div>
 
-			<div class="btn-group mr-2" n:if="$control->hasOuterFilterRendering() && $filters && !$hasFiltersAlwaysShown">
-				<a href="#" class="btn bg-info btn-sm" data-toggle="collapse" data-target="#datagrid-{$controlName}-row-filters">
+			<div class="btn-group mr-2 me-2" n:if="$control->hasOuterFilterRendering() && $filters && !$hasFiltersAlwaysShown">
+				<a href="#" class="btn btn-sm btn-info" data-toggle="collapse" data-bs-toggle="collapse" data-target="#datagrid-{$controlName}-row-filters" data-bs-target="#datagrid-{$controlName}-row-filters">
 					<i class="fas fa-filter fa-fw"></i> {_ublaboo_datagrid.show_filter}
 				</a>
-				<a n:href="resetFilter!" class="btn bg-info btn-sm ajax" title="{_ublaboo_datagrid.reset_filter}"><i class="fas fa-times"></i></a>
+				<a n:href="resetFilter!" class="btn btn-sm btn-info ajax" title="{_ublaboo_datagrid.reset_filter}"><i class="fas fa-times fa-fw"></i></a>
 			</div>
 
-			<div class="btn-group mr-2" n:if="$control->canHideColumns()">
-				<a href="#" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right">
+			<div class="btn-group mr-2 me-2" n:if="$control->canHideColumns()">
+				<a href="#" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown"><i class="fas fa-cog fa-fw"></i></a>
+				<div class="dropdown-menu dropdown-menu-right dropdown-menu-end">
 
 					<a n:href="showAllColumns!" class="dropdown-item ajax"><i class="fas fa-eye fa-fw"></i> {_ublaboo_datagrid.show_all_columns}</a>
 					<a n:href="showDefaultColumns!" class="dropdown-item ajax" n:if="$control->hasSomeColumnDefaultHide()"><i class="fas fa-redo fa-fw"></i> {_ublaboo_datagrid.show_default_columns}</a>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 
-			<div class="btn-group mr-2" n:if="$toolbarButtons || $inlineAdd">
+			<div class="btn-group mr-2 me-2" n:if="$toolbarButtons || $inlineAdd">
 				{foreach $toolbarButtons as $toolbarButton}{$toolbarButton->renderButton()}{/foreach}
 				{if $inlineAdd}{$inlineAdd->renderButtonAdd()}{/if}
 			</div>
@@ -50,20 +50,20 @@
 	<div n:class="$control->hasCollapsibleOuterFilters() ? collapse, $hasFiltersAlwaysShown || $filter_active ? show" id="datagrid-{$controlName}-row-filters" n:if="$control->hasOuterFilterRendering()">
 	<div class="card-body datagrid-filters py-0 pt-3" n:block="outer-filters" n:ifcontent>
 
-		<div class="row" n:foreach="array_chunk($filters, $control->getOuterFilterColumnsCount(), true) as $items">
+		<div class="row g-3" n:foreach="array_chunk($filters, $control->getOuterFilterColumnsCount(), true) as $items">
 			{var $items = array_pad($items, $control->getOuterFilterColumnsCount(), null)}
 			{var $isLastRow = $iterator->isLast()}
 			<div class="col-md" n:foreach="$items as $key => $item">
 				{if !is_null($item)}{include $item->getTemplate(),
 					filter => $item,
-					input => $form['filter'][$key],
+					input => $form[filter][$key],
 					isLastRow => $isLastRow
 				}{/if}
 			</div>
 		</div>
 
-		<div class="text-right datagrid-manual-submit" n:if="!$control->hasAutoSubmit()">
-			{input $filter['filter']['submit']}
+		<div class="text-right text-end datagrid-manual-submit" n:if="!$control->hasAutoSubmit()">
+			{input $filter[filter][submit]}
 		</div>
 
 	</div>
@@ -76,7 +76,7 @@
 			<tr n:block="header-column-row">
 
 				<th n:foreach="$columns as $key => $column" n:attr="$column->getElementForRender('th', $key)->attrs">
-					<a n:href="sort! $control->getSortNext($column)" n:class="ajax, $column->isSortedBy() ? sort" id="datagrid-sort-{$key}" n:tag-if="$column->isSortable()">
+					<a n:href="sort! $control->getSortNext($column)" n:class="ajax, text-decoration-none, $column->isSortedBy() ? sort" id="datagrid-sort-{$key}" n:tag-if="$column->isSortable()">
 						<span n:if="$column->isSortable()">
 							<i class="fas fa-caret-up fa-fw" n:if="$column->isSortedBy() && $column->isSortAsc()"></i>
 							<i class="fas fa-caret-down fa-fw" n:if="$column->isSortedBy() && !$column->isSortAsc()"></i>
@@ -84,12 +84,12 @@
 						</span>
 						{include #column-header, column => $column}
 					</a>
-					<a n:href="resetColumnFilter! $key" data-datagrid-reset-filter-by-column="{$key}" class="text-danger ajax float-right" title="{_ublaboo_datagrid.reset_filter}" n:if="$control->hasColumnReset() && isset($filters[$key]) && $filters[$key]->isValueSet()">
+					<a n:href="resetColumnFilter! $key" data-datagrid-reset-filter-by-column="{$key}" class="text-danger text-decoration-none ajax float-right float-end" title="{_ublaboo_datagrid.reset_filter}" n:if="$control->hasColumnReset() && isset($filters[$key]) && $filters[$key]->isValueSet()">
 						<i class="fas fa-times fa-fw"></i>
 					</a>
 				</th>
 
-				<th n:if="$actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd" class="col-action text-right text-nowrap">
+				<th n:if="$actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd" class="col-action text-right text-end text-nowrap">
 					{_ublaboo_datagrid.action}
 				</th>
 
@@ -134,15 +134,15 @@
 								{$td->endTag()|noescape}
 							{/foreach}
 
-							<td class="col-action text-right text-nowrap col-action-inline-edit">
-								<button n:name="$filter['inline_edit']['submit']" type="submit" class="btn btn-xs btn-primary">
-									<i class="fas fa-fw fa-save"></i>
+							<td class="col-action text-right text-end text-nowrap col-action-inline-edit">
+								<button n:name="$filter[inline_edit][submit]" type="submit" class="btn btn-xs btn-primary">
+									<i class="fas fa-save fa-fw"></i>
 								</button>
-								<button n:name="$filter['inline_edit']['cancel']" type="submit" class="btn btn-xs btn-danger">
-									<i class="fas fa-fw fa-times"></i>
+								<button n:name="$filter[inline_edit][cancel]" type="submit" class="btn btn-xs btn-danger">
+									<i class="fas fa-times fa-fw"></i>
 								</button>
-								{input $filter['inline_edit']['_id']}
-								{input $filter['inline_edit']['_primary_where_column']}
+								{input $filter[inline_edit][_id]}
+								{input $filter[inline_edit][_primary_where_column]}
 							</td>
 						</tr>
 					{else}
@@ -155,7 +155,7 @@
 									{include column-value, column => $column, row => $row, key => $key}
 								{$td->endTag()|noescape}
 							{/foreach}
-							<td n:if="$actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd" class="col-action text-right text-nowrap">
+							<td n:if="$actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd" class="col-action text-right text-end text-nowrap">
 								<span class="handle-sort btn btn-xs btn-secondary" n:if="$control->isSortable()">
 									<i n:block="icon-arrows-v" class="fas fa-arrows-up-down fa-fw"></i>
 								</span>
@@ -221,9 +221,9 @@
 
 			{block noItems}
 				<tr n:if="!$rows">
-					<td colspan="{$control->getColumnsCount()}" class="py-2 text-muted font-italic">
+					<td colspan="{$control->getColumnsCount()}" class="py-2 text-muted text-secondary font-italic fst-italic">
 						{if $filter_active}
-							{_ublaboo_datagrid.no_item_found_reset} <a n:href="resetFilter!" class="link ajax">{_ublaboo_datagrid.here}</a>.
+							{_ublaboo_datagrid.no_item_found_reset} <a n:href="resetFilter!" class="text-decoration-none link ajax">{_ublaboo_datagrid.here}</a>.
 						{else}
 							{_ublaboo_datagrid.no_item_found}
 						{/if}
@@ -245,18 +245,18 @@
 			{control paginator}
 		</div>
 
-		<div class="col-items col-per-page form-inline flex-nowrap pr-3 py-2" n:ifcontent>
+		<div class="col-items col-per-page d-flex flex-nowrap pr-3 pe-3 py-2" n:ifcontent>
 
-			<a n:href="resetFilter!" n:if="$filter_active" class="btn btn-danger btn-sm ajax text-nowrap reset-filter">
+			<a n:href="resetFilter!" n:if="$filter_active" class="btn btn-sm btn-danger ajax text-nowrap reset-filter">
 				<i class="fas fa-filter-circle-xmark fa-fw"></i> {_ublaboo_datagrid.reset_filter}
 			</a>
 
 			<span class="mx-1" n:if="$control->isPaginated() && $filter_active"></span>
 
 			<div class="input-group input-group-sm datagrid-per-page" n:if="$control->isPaginated()">
-				<div class="input-group-prepend">
-					<span class="input-group-text text-muted">
-						{var $paginator = $control['paginator']->getPaginator()}
+				<div class="input-group-prepend" n:tag-if="!$bs5">
+					<span class="input-group-text text-muted text-secondary">
+						{var $paginator = $control[paginator]->getPaginator()}
 
 						{if $control->getPerPage() === 'all'}
 							{_ublaboo_datagrid.items}: {_ublaboo_datagrid.all}
@@ -266,9 +266,9 @@
 						{/if}
 					</span>
 				</div>
-				<select n:name="$filter['perPage']" style="min-width: 70px" data-no-search data-autosubmit-per-page></select>
-				<div class="input-group-append">
-					<button n:name="$filter['perPage_submit']" type="submit" class="btn btn-outline-secondary datagrid-per-page-submit">{_ublaboo_datagrid.per_page_submit}</button>
+				<select n:name="$filter[perPage]" style="min-width: 70px" data-no-search data-autosubmit-per-page></select>
+				<div class="input-group-append" n:tag-if="!$bs5">
+					<button n:name="$filter[perPage_submit]" type="submit" class="btn btn-outline-secondary datagrid-per-page-submit">{_ublaboo_datagrid.per_page_submit}</button>
 				</div>
 			</div>
 
@@ -289,7 +289,7 @@
 
 {define inlineAddRow}
 <tr class="datagrid-row-inline-add datagrid-row-inline-add-hidden" n:if="$inlineAdd->shouldBeRendered()">
-	{php $inlineAdd->onSetDefaults($filter['inline_add'])}
+	{php $inlineAdd->onSetDefaults($filter[inline_add])}
 	<td n:if="$hasGroupActions" class="col-checkbox"></td>
 
 	{foreach $columns as $key => $column}
@@ -298,23 +298,23 @@
 		{var $td = clone $column->getElementForRender('td', $key)}
 		{var $td->class[] = 'datagrid-inline-edit'}
 		{$td->startTag()|noescape}
-			{if isset($filter['inline_add'][$key])}
-				{if $filter['inline_add'][$key] instanceof \Nette\Forms\Container}
-					{foreach $filter['inline_add'][$key]->getControls() as $inlineAddControl}
+			{if isset($filter[inline_add][$key])}
+				{if $filter[inline_add][$key] instanceof \Nette\Forms\Container}
+					{foreach $filter[inline_add][$key]->getControls() as $inlineAddControl}
 						{input $inlineAddControl}
 					{/foreach}
 				{else}
-					{input $filter['inline_add'][$key]}
+					{input $filter[inline_add][$key]}
 				{/if}
 			{/if}
 		{$td->endTag()|noescape}
 	{/foreach}
 
 	<td class="col-action text-nowrap col-action-inline-edit">
-		<button n:name="$filter['inline_add']['submit']" type="submit" class="btn btn-xs btn-primary">
+		<button n:name="$filter[inline_add][submit]" type="submit" class="btn btn-xs btn-primary">
 			<i class="fas fa-fw fa-save"></i>
 		</button>
-		<button n:name="$filter['inline_add']['cancel']" type="submit" class="btn btn-xs btn-danger">
+		<button n:name="$filter[inline_add][cancel]" type="submit" class="btn btn-xs btn-danger">
 			<i class="fas fa-fw fa-times"></i>
 		</button>
 	</td>
