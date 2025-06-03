@@ -241,8 +241,12 @@ class LatteExtension extends Extension
 		$icon = Html::icon($icon, true, Color::make($color));
 		$html = Html::el('button type="button" class="btn btn-link p-0 mt-n2"')
 			->title($icon.' '.$this->translator->translate($title))
-			->data('toggle', 'popover')->data('trigger', 'focus')
 			->data('content', $content)
+			->data('trigger', 'focus')
+			->data('toggle', 'popover')
+			->data('bs-content', $content)
+			->data('bs-trigger', 'focus')
+			->data('bs-toggle', 'popover')
 			->tabindex(0);
 
 		$info->contentType = ContentType::Html;

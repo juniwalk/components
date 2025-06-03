@@ -125,8 +125,8 @@ class Dropdown extends UIControl implements Action, Component
 
 	public function create(): Html
 	{
-		$button = $this->getControl()
-			->addClass('dropdown-toggle')
+		$button = $this->getControl()->addClass('dropdown-toggle')
+			->data('bs-toggle', 'dropdown')
 			->data('toggle', 'dropdown');
 
 		$this->control->addClass('dropdown-menu');
