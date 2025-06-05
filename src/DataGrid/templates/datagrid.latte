@@ -196,7 +196,7 @@
 								</td>
 							{elseif $itemsDetail}
 								<td colspan="{$control->getColumnsCount()}" class="p-0">
-									<div class="item-detail-content px-4 py-1 bg-light">
+									<div class="item-detail-content px-4 py-1">
 										{if $itemsDetail->getType() == 'template'}
 											{include $itemsDetail->getTemplate(), (expand) $item_detail_params}
 										{else}
