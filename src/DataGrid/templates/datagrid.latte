@@ -50,7 +50,7 @@
 	<div n:class="$control->hasCollapsibleOuterFilters() ? collapse, $hasFiltersAlwaysShown || $filter_active ? show" id="datagrid-{$controlName}-row-filters" n:if="$control->hasOuterFilterRendering()">
 	<div class="card-body datagrid-filters py-2" n:block="outer-filters" n:ifcontent>
 
-		<div class="row g-2 row-cols-auto row-cols-lg-{$control->getOuterFilterColumnsCount() ?? auto}">
+		<div class="row g-2 row-cols-auto row-cols-lg-{$control->getOuterFilterColumnsCount() ?? auto}" n:ifcontent>
 			<div class="col flex-grow-1 flex-lg-grow-0" n:foreach="$filters as $key => $item">
 				{include $item->getTemplate(),
 					input: $form[filter][$key],
