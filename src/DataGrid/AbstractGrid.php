@@ -205,7 +205,7 @@ abstract class AbstractGrid extends Control
 		$gridTemplate->help = $this->help;
 
 		// Bootstrap5 compatibility
-		$gridTemplate->bs5 = static::$bs5;
+		$gridTemplate->bs5 = $this::$bs5;
 
 		$template = $this->getTemplate();
 		$template->setFile(static::TemplatesDir.'/datagrid-wrapper.latte');
@@ -234,8 +234,8 @@ abstract class AbstractGrid extends Control
 		$grid = $this->grid = new DataGrid;
 		$grid->setRememberState($rememberState);
 		$grid->setRefreshUrl(!$rememberState);
+		$grid->setTemplateFile(static::TemplatesDir.'/datagrid'.($this::$bs5 ? '.bs5' : null).'.latte');
 		$grid->setCustomPaginatorTemplate(static::TemplatesDir.'/datagrid_paginator.latte');
-		$grid->setTemplateFile(static::TemplatesDir.'/datagrid.latte');
 		$grid->setItemsPerPageList([10, 20, 50], false);
 		$grid->setDefaultPerPage(20);
 
