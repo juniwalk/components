@@ -29,6 +29,9 @@ final class Paginator extends Control implements Countable, IteratorAggregate
 	/** @var callable[] */
 	public array $onChange = [];
 
+	// Bootstrap5 compatibility
+	public static bool $bs5 = false;
+
 	private readonly Translator $translator;
 	private readonly NettePages $pages;
 	private int $maxPages = 9;
@@ -143,7 +146,8 @@ final class Paginator extends Control implements Countable, IteratorAggregate
 	public function render(): void
 	{
 		$template = $this->createTemplate();
-		$template->setFile(__DIR__.'/templates/default.latte');
+		$template->setFile(__DIR__.'/templates/default'.($this::$bs5 ? '.bs5' : null).'.latte');
+
 		$template->render();
 	}
 
@@ -152,7 +156,7 @@ final class Paginator extends Control implements Countable, IteratorAggregate
 	{
 		/** @var DefaultTemplate */
 		$template = $this->createTemplate();
-		$template->setFile(__DIR__.'/templates/pages.latte');
+		$template->setFile(__DIR__.'/templates/pages'.($this::$bs5 ? '.bs5' : null).'.latte');
 		$template->setParameters([
 			'steps' => $this->createSteps(),
 			'link' => $this->link(...),
@@ -168,7 +172,7 @@ final class Paginator extends Control implements Countable, IteratorAggregate
 	{
 		/** @var DefaultTemplate */
 		$template = $this->createTemplate();
-		$template->setFile(__DIR__.'/templates/perpage.latte');
+		$template->setFile(__DIR__.'/templates/perpage'.($this::$bs5 ? '.bs5' : null).'.latte');
 		$template->setParameters([
 			'isAjax' => $this->isAjax,
 			'pages' => $this->pages,

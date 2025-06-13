@@ -1,12 +1,10 @@
-<form n:name="perPage" class="input-group input-group-sm">
-	<div class="input-group-prepend">
-		<span class="input-group-text text-muted">
+<form n:name="perPage" class="form-inline">
+	<div class="input-group input-group-sm">
+		<span class="input-group-text text-secondary">
 			{_ublaboo_datagrid.items}: {$pages->getFirstItemOnPage()} - {$pages->getLastItemOnPage()}
 			{_ublaboo_datagrid.from} {$pages->getItemCount()}
 		</span>
-	</div>
-	<select n:name="perPage" class="tom-select" data-no-search></select>
-	<div class="input-group-append">
+		<select n:name="perPage" class="form-select" data-no-search></select>
 		<button n:name="submit" type="submit" n:class="btn, btn-outline-secondary, $isAjax ? ajax">{_ublaboo_datagrid.per_page_submit}</button>
 	</div>
 </form>
