@@ -74,6 +74,7 @@ fieldset {
 }
 
 legend {
+	float: none !important;
 	font-size: 10pt;
 	font-weight: 600;
 	padding: 0pt 10pt;

@@ -74,16 +74,16 @@
 .text-lowercase { text-transform: lowercase; }
 
 .text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
+.text-left, .text-start { text-align: left; }
+.text-right, .text-end { text-align: right; }
 .text-justify { text-align: justify; }
 
-.font-weight-bold { font-weight: bold; }
-.font-italic { font-style: italic; }
+.font-weight-bold, .fw-bold { font-weight: bold; }
+.font-italic, .fst-italic { font-style: italic; }
 .font-1x { font-size: 8pt; }
 .font-2x { font-size: 12pt; }
 .font-3x { font-size: 16pt; }
-.font-4x { font-size: 24pt; }
+.font-4x { font-size: 24pt; line-height: 24px; }
 
 .text-truncate {
 	overflow: hidden;
@@ -150,4 +150,5 @@
  * UTILS
  * ====================================
  */
-.float-right { float: right !important; }
+.float-left, .float-start { float: left !important; }
+.float-right, .float-end { float: right !important; }
