@@ -312,6 +312,8 @@ pre { white-space: pre-wrap; }
 
 .card {
 	--bs-card-cap-bg: var(--bs-card-bg);
+	--bs-card-cap-padding-y: 0.75rem;
+	--bs-card-cap-padding-x: 1.25rem;
 
 	margin-bottom: 1rem;
 	box-shadow: 0px 0px 1px rgba(var(--bs-black-rgb), .125),
@@ -319,11 +321,6 @@ pre { white-space: pre-wrap; }
 }
 
 .card .card-header .card-title { margin: 0px; }
-.card .card-header {
-	--bs-card-cap-padding-y: 0.75rem;
-	--bs-card-cap-padding-x: 1.25rem;
-}
-
 .card .card-footer {
 	background-color: rgba(var(--bs-dark-bg-subtle-rgb), .5);
 	border-bottom-left-radius: var(--bs-card-border-radius);
