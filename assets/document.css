@@ -14,10 +14,11 @@ html, body {
 .break-before { break-before: page; }
 .break-after { break-after: page; }
 
-.page { height: auto; }
+.page { height: auto; padding-right: 1px; } /* ? Padding right for PDF generator to show right borders */
 .page.h-full { height: calc(100% - var(--pagedjs-footnotes-height)); }
-.page .logo { height: 3.2rem; line-height: 3.2rem; margin-bottom: 0px; }
+.logo { height: 3.2rem; line-height: 3.2rem; margin-bottom: 0px; }
 
+.line-solid { border-bottom: 1px solid black; }
 .line-dashed { border-bottom: 1px dashed black; }
 .signature {
 	color: var(--secondary);
@@ -54,8 +55,7 @@ html, body {
 	border-radius: 5px; 
 }
 
-.user-detail.supplier table th { width: 75px; }
-.user-detail.customer table th { width: 55px; }
+.user-detail table th { width: 55px; }
 
 
 /**
@@ -93,17 +93,23 @@ dl dd { margin-bottom: 0pt; }
  * Tables
  */
 table { width: 100%; }
+table.table-fixed { table-layout: fixed; }
 
 table td,
 table th {
-	padding: 1pt 4pt;
+	padding: 0.5rem;
 	border: 0pt;
 	vertical-align: text-bottom;
 }
 
+table.table-sm td,
+table.table-sm th {
+	padding: 0.125rem 0.5rem;
+}
+
 table td { height: 21px; }
 table th {
-	color: var(--secondary);
+	color: var(--bs-secondary, --secondary);
 	font-style: italic;
 	text-transform: lowercase;
 	font-size: 8pt;
@@ -112,6 +118,13 @@ table th {
 
 table.th-150 th { width: 150px; }
 table.th-220 th { width: 220px; }
+
+
+table.table-bordered,
+table.table-bordered td,
+table.table-bordered th {
+	border: 1px solid #000;
+}
 
 
 /**
