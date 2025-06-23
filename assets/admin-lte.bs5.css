@@ -82,11 +82,19 @@ pre { white-space: pre-wrap; }
 	background-color: transparent;
 }
 
+
+@media (min-width: 576px)	{ .sidebar-expand-sm.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 768px)	{ .sidebar-expand-md.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 992px)	{ .sidebar-expand-lg.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 1200px)	{ .sidebar-expand-xl.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 1400px)	{ .sidebar-expand-xxl.sidebar-open .app-sidebar { z-index: 250 !important; } }
+
 .app-sidebar {
 	background-color: var(--bs-tertiary-bg);
 	box-shadow: 0 14px 28px rgba(var(--bs-black-rgb), .25),
 				0 10px 10px rgba(var(--bs-black-rgb), .22);
 }
+
 
 .app-main .app-content-header h1 small { font-size: 0.625em; color: var(--bs-secondary); }
 .app-main .app-content-header .breadcrumb { line-height: inherit; }
