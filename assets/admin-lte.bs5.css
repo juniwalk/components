@@ -395,6 +395,7 @@ pre { white-space: pre-wrap; }
  */
 .with-state { line-height: 1.15; }
 .with-state:is(.dropdown-menu) { width: 20rem; }
+.with-state:is(.dropdown-menu):is(.state-sm) { width: 12rem; }
 
 .with-state :is(.dropdown-item, .list-group-item) {
 	--bs-list-group-item-padding-y: .5rem;
@@ -405,10 +406,12 @@ pre { white-space: pre-wrap; }
 	flex-flow: row nowrap;
 	white-space: normal;
 	padding-left: 0px;
+	overflow: hidden;
 }
 
-.with-state .content { flex: 1 1 auto; flex-flow: column; }
+.with-state .content { flex: 1 1 auto; flex-flow: column; min-width: 0; max-width: 100%; }
 .with-state .state { flex: 0 0 3.5rem; text-align: center; }
+.with-state:is(.state-sm) .state { flex-basis: 2.25rem; }
 
 
 /**
