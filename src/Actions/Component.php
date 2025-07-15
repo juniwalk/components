@@ -16,7 +16,7 @@ interface Component
 	public function setTranslator(?Translator $translator): void;
 	public function setTitle(?string $title): static;
 	public function getTitle(): ?string;
-	public function setIcon(string $icon, bool $fixedWidth = true, Color $color = null): static;
+	public function setIcon(string $icon, bool $fixedWidth = true, ?Color $color = null): static;
 	public function getIcon(): ?Html;
 	public function hasClass(string $name): bool;
 	public function addClass(string $class): static;
