@@ -7,19 +7,18 @@
 
 namespace JuniWalk\Components\DataGrid;
 
+use Contributte\Datagrid\Column\Column;
+use Contributte\Datagrid\Column\ColumnDateTime;
+use Contributte\Datagrid\Datagrid;
+use Contributte\Datagrid\DataSource\DoctrineDataSource;
+use Contributte\Datagrid\Row;
 use Contributte\Translation\Wrappers\Message;
 use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Enums\Interfaces\LabeledEnum;
 use JuniWalk\Utils\Html;
 use Nette\Application\UI\Control;
-use Nette\Localization\ITranslator as Translator;
+use Nette\Localization\Translator;
 use Nette\Utils\Html as NetteHtml;
-// use Nette\Localization\Translator;
-use Ublaboo\DataGrid\Column\Column;
-use Ublaboo\DataGrid\Column\ColumnDateTime;
-use Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\DataSource\DoctrineDataSource;
-use Ublaboo\DataGrid\Row;
 use UnexpectedValueException;
 use Stringable;
 
@@ -149,7 +148,7 @@ abstract class AbstractGrid extends Control
 		$column->onChange[] = fn($id, $value) => $this->$signalMethod((int) $id, $enum::make($value));
 
 		foreach ($enum::cases() as $item) {
-			$color = ($item->color() ?? Color::Secondary)->for('btn');	// @phpstan-ignore-line v3.0 utils had color() method return null.
+			$color = ($item->color() ?? Color::Secondary)->for('btn');
 			$option = $column->addOption($item->value, $item->label())
 				->setClass($class.' '.$color);
 

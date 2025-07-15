@@ -7,9 +7,9 @@
 
 namespace JuniWalk\Components\DataGrid\DataSource;
 
+use Contributte\Datagrid\Datagrid;
+use Contributte\Datagrid\DataSource\DoctrineDataSource;
 use Doctrine\DBAL\Exception as DBALException;
-use Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\DataSource\DoctrineDataSource;
 
 /**
  * @inheritDoc
