@@ -40,9 +40,9 @@
 		"phpstan/phpstan": "^2.0",
 		"phpstan/phpstan-nette": "^2.0",
 		"scrivo/highlight.php": "^9.0",
-		"staabm/phpstan-todo-by": "^0.2",
+		"staabm/phpstan-todo-by": "^0.3",
 		"tracy/tracy": "^2.0",
-		"ublaboo/datagrid": "dev-master"
+		"ublaboo/datagrid": "^7.0"
 	},
 
     "suggest": {
