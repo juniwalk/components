@@ -59,7 +59,7 @@
 		let theme = getStoredTheme();
 		showActiveTheme(theme);
 
-		document.querySelectorAll('[name=recaptcha]').forEach(element => {
+		document.querySelectorAll('.g-recaptcha').forEach(element => {
 			if (theme === 'auto') {
 				theme = getSystemTheme();
 			}
