@@ -257,6 +257,10 @@ pre { white-space: pre-wrap; }
 	border-bottom: 0px;
 }
 
+.nav.nav-tabs.card-header-tabs {
+	margin-bottom: calc(-3px + var(--bs-card-cap-padding-y) * -1);
+}
+
 
 /**
  * Sidebar active nav-links in primary color
