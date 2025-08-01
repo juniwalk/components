@@ -61,15 +61,16 @@ trait Links
 		}
 
 		$invalidLinkMode = $presenter->invalidLinkMode;
-		$presenter->invalidLinkMode = $presenter::InvalidLinkException;
 		$component = $this;
 
 		do {
-			try {
-				if (!$component instanceof Component) {
-					break;
-				}
+			$presenter->invalidLinkMode = $presenter::InvalidLinkException;
 
+			if (!method_exists($component, 'link')) {
+				continue;
+			}
+
+			try {
 				return $component->$method($dest, $args);
 
 			} catch (InvalidLinkException) {
