@@ -66,7 +66,7 @@ trait Links
 		do {
 			$presenter->invalidLinkMode = $presenter::InvalidLinkException;
 
-			if (!method_exists($component, 'link')) {
+			if (!method_exists($component, $method)) {
 				continue;
 			}
 
