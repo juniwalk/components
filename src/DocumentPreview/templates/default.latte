@@ -7,11 +7,11 @@
 
 			<h4 class="modal-title">{$title|translate|noescape}</h4>
 
-			<div class="btn-toolbar" n:snippet="toolbar">
-				<div class="btn-group mr-2 me-2" n:if="$actions" n:inner-foreach="$actions as $action">
+			<div class="btn-toolbar gap-2" n:snippet="toolbar">
+				{foreach $actions as $action}
 					{control $action}
-				</div>
-				<div class="btn-group">
+				{/foreach}
+				<div class="btn-group ml-2">
 					<a class="btn btn-sm btn-secondary" data-dismiss="modal" data-bs-dismiss="modal" data-tooltip data-bs-toggle="tooltip" title="{_web.button.frame-close|stripHtml|trim}">{_web.button.frame-close|noescape}</a>
 				</div>
 			</div>
