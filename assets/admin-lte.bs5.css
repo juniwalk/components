@@ -83,19 +83,56 @@ pre { white-space: pre-wrap; }
 }
 
 
-@media (min-width: 576px)	{ .sidebar-expand-sm.sidebar-open .app-sidebar { z-index: 250 !important; } }
-@media (min-width: 768px)	{ .sidebar-expand-md.sidebar-open .app-sidebar { z-index: 250 !important; } }
-@media (min-width: 992px)	{ .sidebar-expand-lg.sidebar-open .app-sidebar { z-index: 250 !important; } }
-@media (min-width: 1200px)	{ .sidebar-expand-xl.sidebar-open .app-sidebar { z-index: 250 !important; } }
-@media (min-width: 1400px)	{ .sidebar-expand-xxl.sidebar-open .app-sidebar { z-index: 250 !important; } }
-
+/**
+ * Sidebar
+ */
 .app-sidebar {
 	background-color: var(--bs-tertiary-bg);
 	box-shadow: 0 14px 28px rgba(var(--bs-black-rgb), .25),
 				0 10px 10px rgba(var(--bs-black-rgb), .22);
 }
 
+.app-sidebar .user-panel .image { min-width: 3.6rem; margin-left: -1rem; text-align: center; }
+.app-sidebar .user-panel img {
+	border-radius: 50%;
+	height: auto;
+	width: 3rem;
+}
 
+@media (min-width: 576px)	{ .sidebar-expand-sm.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 768px)	{ .sidebar-expand-md.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 992px)	{ .sidebar-expand-lg.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 1200px)	{ .sidebar-expand-xl.sidebar-open .app-sidebar { z-index: 250 !important; } }
+@media (min-width: 1400px)	{ .sidebar-expand-xxl.sidebar-open .app-sidebar { z-index: 250 !important; } }
+
+
+/**
+ * Sidebar Mini
+ */
+.sidebar-mini.sidebar-collapse .sidebar-menu .nav-header {
+	display: initial;
+	width: 3.6rem;
+}
+
+.sidebar-mini.sidebar-collapse .sidebar-menu .nav-header span {
+	animation: fadeOut 0.3s;
+	display: inline-block;
+	white-space: nowrap;
+	visibility: hidden;
+	width: 0;
+}
+
+.sidebar-mini.sidebar-collapse .app-sidebar:hover .sidebar-menu .nav-header { width: auto; }
+.sidebar-mini.sidebar-collapse .app-sidebar:hover .sidebar-menu .nav-header span {
+	width: auto;
+	visibility: visible;
+	animation: fadeIn 0.3s;
+}
+
+
+/**
+ * Main content
+ */
 .app-main .app-content-header h1 small { font-size: 0.625em; color: var(--bs-secondary); }
 .app-main .app-content-header .breadcrumb { line-height: inherit; }
 
@@ -276,6 +313,8 @@ pre { white-space: pre-wrap; }
 }
 
 .sidebar-menu .nav-treeview .nav-link { padding-left: 2rem; }
+
+.sidebar-menu .nav-header { padding: .5rem 1.25rem; }
 
 
 /**
