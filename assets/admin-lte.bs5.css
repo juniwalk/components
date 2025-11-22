@@ -233,14 +233,16 @@ pre { white-space: pre-wrap; }
 :is(.nav, .navbar-nav, .nav-tabs) .nav-link.active { background-color: rgba(0, 0, 0, .25); }
 :is(.nav, .navbar-nav, .nav-tabs) .nav-link:hover { background-color: rgba(0, 0, 0, .125); }
 :is(.nav, .navbar-nav, .nav-tabs) .nav-link {
-	--bs-navbar-nav-link-padding-x: .75rem;
-	--bs-nav-link-padding-x: .75rem;
-
 	border-radius: var(--bs-border-radius);
 	transition: background-color .15s ease-in-out,
 				border-color .15s ease-in-out,
 				box-shadow .15s ease-in-out,
 				color .15s ease-in-out;
+}
+
+:is(.nav, .navbar-nav, .nav-tabs):not(.sidebar-menu) .nav-link {
+	--bs-navbar-nav-link-padding-x: .75rem;
+	--bs-nav-link-padding-x: .75rem;
 }
 
 
