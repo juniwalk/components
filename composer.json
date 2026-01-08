@@ -34,15 +34,16 @@
 		"doctrine/orm": "^2.0|^3.0",
 		"latte/latte": "^3.0",
 		"league/commonmark": "^2.0",
+		"nette/application": "^3.0",
 		"nette/security": "^3.0",
+		"nette/forms": "^3.0",
 		"nette/tester": "^2.0",
 		"phpstan/extension-installer": "^1.0",
 		"phpstan/phpstan": "^2.0",
 		"phpstan/phpstan-nette": "^2.0",
 		"scrivo/highlight.php": "^9.0",
 		"staabm/phpstan-todo-by": "^0.3",
-		"tracy/tracy": "^2.0",
-		"ublaboo/datagrid": "^7.0"
+		"tracy/tracy": "^2.0"
 	},
 
     "suggest": {
