@@ -68,6 +68,7 @@ pre { white-space: pre-wrap; }
 .fs-7 { font-size: .75rem; }
 .fs-8 { font-size: .5rem; }
 
+[data-link] { cursor: pointer; }
 [data-copy] { cursor: copy; }
 
 
