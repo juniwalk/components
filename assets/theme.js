@@ -20,6 +20,11 @@
 		}
 
 		document.documentElement.setAttribute('data-bs-theme', theme);
+		document.dispatchEvent(new CustomEvent('switch.bs.theme', {
+			detail: { theme: theme, time: new Date() },
+			cancelable: true,
+			bubbles: true,
+		}));
 	}
 
 	const showActiveTheme = (theme, focus = false) => {
