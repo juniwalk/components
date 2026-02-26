@@ -30,3 +30,8 @@ class ConfirmExtension
 		}
 	}
 }
+
+// ? Auto register the extension in Naja.js
+if (typeof naja !== 'undefined') {
+	naja?.registerExtension(new ConfirmExtension);
+}

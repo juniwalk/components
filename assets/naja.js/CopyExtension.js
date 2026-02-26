@@ -35,3 +35,8 @@ class CopyExtension
 		document.body.removeChild(clone);
 	}
 }
+
+// ? Auto register the extension in Naja.js
+if (typeof naja !== 'undefined') {
+	naja?.registerExtension(new CopyExtension);
+}

@@ -30,3 +30,8 @@ class SearchExtension
 		}
 	}
 }
+
+// ? Auto register the extension in Naja.js
+if (typeof naja !== 'undefined') {
+	naja?.registerExtension(new SearchExtension);
+}
