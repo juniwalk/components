@@ -31,7 +31,12 @@ class OverlayExtension
 	#attach(snippet) {
 		snippet.querySelectorAll('[data-overlay]:not(.ajax)')
 			.forEach((element) => {
-				element.addEventListener('click', () => this.#show(element));
+				if (element.matches('button[type=submit]')) {
+					element.form.addEventListener('submit', () => this.#show(element));
+
+				} else {
+					element.addEventListener('click', () => this.#show(element));
+				}
 			});
 	}
 
