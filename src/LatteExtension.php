@@ -98,7 +98,7 @@ class LatteExtension extends Extension
 		}
 
 		$label = 'enum.date.'.($diff->invert === 0 ? 'future' : 'past');
-		return $this->translator->translate($label, [
+		return (string) $this->translator->translate($label, [
 			'timestamp' => implode(', ', $parts),
 		]);
 	}
