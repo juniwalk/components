@@ -7,6 +7,8 @@
 
 namespace JuniWalk\Components;
 
+use DateTime;
+use DateTimeInterface;
 use Highlight\Highlighter;
 use JuniWalk\Utils\Enums\Color;
 use JuniWalk\Utils\Enums\Currency;
@@ -55,8 +57,50 @@ class LatteExtension extends Extension
 			'popover' => $this->filterPopover(...),
 			'markdown' => $this->filterMarkdown(...),
 			'prettyJson' => $this->filterPrettyJson(...),
+			'dateRelative' => $this->formatDateRelative(...),
 			'syntaxHighlight' => $this->filterSyntaxHighlight(...),
 		];
+	}
+
+
+	protected function formatDateRelative(
+		?DateTimeInterface $dateFrom,
+		DateTimeInterface $dateTo = new DateTime,
+	): ?string {
+		static $labels = [
+			'y' => 'enum.date.year',
+			'm' => 'enum.date.month',
+			'd' => 'enum.date.day',
+			'h' => 'enum.date.hour',
+			'i' => 'enum.date.minute',
+			's' => 'enum.date.second',
+		];
+
+		if (!$dateFrom) {
+			return null;
+		}
+
+		$diff = ($dateTo)->diff($dateFrom);
+		$parts = [];
+
+		foreach ($labels as $part => $label) {
+			if ($part === 's' && !empty($parts)) {
+				break;
+			}
+
+			if (!$count = $diff->$part) {
+				continue;
+			}
+
+			$parts[$part] = $this->translator->translate($label, [
+				'count' => $count,
+			]);
+		}
+
+		$label = 'enum.date.'.($diff->invert === 0 ? 'future' : 'past');
+		return $this->translator->translate($label, [
+			'timestamp' => implode(', ', $parts),
+		]);
 	}
 
 
