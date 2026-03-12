@@ -21,7 +21,7 @@ class OverlayExtension
 			this.#trigger = event.detail.element;
 		});
 
-		naja.addEventListener('start', () => this.#show(this.#trigger));
+		naja.addEventListener('start', (event) => this.#show(event, this.#trigger));
 		naja.addEventListener('complete', () => this.#hide());
 
 		this.#attach(document);
@@ -32,16 +32,16 @@ class OverlayExtension
 		snippet.querySelectorAll('[data-overlay]:not(.ajax)')
 			.forEach((element) => {
 				if (element.matches('button[type=submit]')) {
-					element.form.addEventListener('submit', () => this.#show(element));
+					element.form.addEventListener('submit', (event) => this.#show(event, element));
 
 				} else {
-					element.addEventListener('click', () => this.#show(element));
+					element.addEventListener('click', (event) => this.#show(event, element));
 				}
 			});
 	}
 
 
-	#show(element) {
+	#show(event, element) {
 		if (element === undefined) {
 			return;
 		}
@@ -50,9 +50,17 @@ class OverlayExtension
 		document.querySelectorAll('.tooltip.show').forEach((tooltip) => tooltip.remove());
 		element.querySelector('[data-spin] > i')?.classList.add('fa-spin');
 
-		if (element.hasAttribute('data-overlay')) {
-			this.#fadeIn(this.#overlay);
+		if (!element.hasAttribute('data-overlay')) {
+			return;
 		}
+
+		setTimeout(() => {
+			if (event.defaultPrevented) {
+				return;
+			}
+
+			this.#fadeIn(this.#overlay);
+		}, 0);
 	}
 
 
