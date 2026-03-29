@@ -16,12 +16,6 @@ class OverlayExtension
 			return;
 		}
 
-		window.addEventListener('page.overlay.hide', (event) => this.#hide());
-		window.addEventListener('page.overlay.show', (event) => {
-			this.#trigger = event.detail.target;
-			this.#show(this.#trigger);
-		});
-
 		naja.snippetHandler.addEventListener('afterUpdate', (event) => this.#attach(event.detail.snippet));
 		naja.uiHandler.addEventListener('interaction', (event) => {
 			this.#trigger = event.detail.element;
