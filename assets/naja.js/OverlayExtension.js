@@ -38,6 +38,11 @@ class OverlayExtension
 					element.addEventListener('click', (event) => this.#show(event, element));
 				}
 			});
+
+		snippet.querySelectorAll('[data-download-fetch]')
+			.forEach((element) => {
+				element.addEventListener('click', (event) => this.#handleDownloadFetch(event, element));
+			});
 	}
 
 
@@ -71,6 +76,41 @@ class OverlayExtension
 
 		this.#fadeOut(this.#overlay);
 		this.#trigger = undefined;
+	}
+
+
+	async #handleDownloadFetch(event, element) {
+		event.preventDefault();
+
+		if (element.hasAttribute('data-overlay')) {
+			element.querySelector('[data-spin] > i')?.classList.add('fa-spin');
+			this.#fadeIn(this.#overlay);
+		}
+
+		try {
+			const response = await fetch(element.href);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const blob = await response.blob();
+			const url = window.URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = this.#getFilenameFromResponse(response);
+
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			window.URL.revokeObjectURL(url);
+
+		} catch (error) {
+			console.error('Download failed:', error);
+
+		} finally {
+			this.#hide();
+		}
 	}
 
 
@@ -114,6 +154,35 @@ class OverlayExtension
 		}
 
 		requestAnimationFrame(step);
+	}
+
+
+	#getFilenameFromResponse(response) {
+		const disposition = response.headers.get('Content-Disposition');
+		if (!disposition) {
+			return 'download';
+		}
+
+		const utf8Match = disposition.match(/filename\*\s*=\s*UTF-8''([^;\r\n]+)/i);
+		if (utf8Match && utf8Match[1]) {
+			try {
+				return decodeURIComponent(utf8Match[1].trim());
+			} catch {
+				return utf8Match[1].trim();
+			}
+		}
+
+		const quotedMatch = disposition.match(/filename\s*=\s*"([^"]+)"/i);
+		if (quotedMatch && quotedMatch[1]) {
+			return quotedMatch[1].trim();
+		}
+
+		const plainMatch = disposition.match(/filename\s*=\s*([^;\r\n]+)/i);
+		if (plainMatch && plainMatch[1]) {
+			return plainMatch[1].trim();
+		}
+
+		return 'download';
 	}
 }
 
