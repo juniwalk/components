@@ -151,6 +151,12 @@ pre { white-space: pre-wrap; }
 
 
 /**
+ * Accessibility
+ */
+.live-region { display: none !important; }	/* ? Causes overflow issues */
+
+
+/**
  * Main content
  */
 .app-main .app-content-header h1 small { font-size: 0.625em; color: var(--bs-secondary); }
