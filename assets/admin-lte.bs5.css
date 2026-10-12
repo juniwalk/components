@@ -93,14 +93,20 @@ pre { white-space: pre-wrap; }
 	animation: none;
 }
 
-.brand-link { display: flex; align-items: center; gap: 8px; }
-.brand-link .brand-text { color: var(--bs-emphasis-color); font-size: 16pt; letter-spacing: .025em; margin: 0px !important; }
-.brand-link svg { height: 24px; fill: var(--bs-emphasis-color); vertical-align: top; margin-top: 4px; }
-.brand-link sup { color: #fc603f; top: -.4em; font-size: .65em; }
+.brand-text {
+	font-weight: 900;
+}
 
-.login-logo .brand-link { gap: 16px; text-align: center; }
-.login-logo .brand-text { font-size: 32pt; }
-.login-logo .brand-link svg { height: 48px; }
+.brand-link { display: flex; align-items: center; gap: 0.125rem; }
+.brand-link .brand-text { color: var(--bs-emphasis-color); font-size: 1.3rem; margin: 0px !important; }
+.brand-link svg { width: auto; height: 2rem; fill: var(--bs-emphasis-color); }
+
+.login-logo .brand-link { gap: 0.3rem; text-align: center; }
+.login-logo .brand-text { font-size: 3.25rem; }
+.login-logo .brand-link svg {
+	width: auto;
+	height: 5rem;
+}
 
 
 /**
