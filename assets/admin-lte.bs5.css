@@ -800,6 +800,33 @@ pre { white-space: pre-wrap; }
 
 
 /**
+ * Adaptive color variant to the theme
+ */
+.btn.btn-adaptive {
+	--bs-btn-color: var(--bs-body-color);
+	--bs-btn-bg: var(--bs-tertiary-bg);
+	--bs-btn-border-color: var(--bs-border-color-translucent);
+	--bs-btn-hover-color: var(--bs-body-color);
+	--bs-btn-hover-bg: var(--bs-secondary-bg);
+	--bs-btn-hover-border-color: var(--bs-border-color);
+	--bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+	--bs-btn-active-color: var(--bs-body-color);
+	--bs-btn-active-bg: var(--bs-secondary-bg);
+	--bs-btn-active-border-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .btn-adaptive {
+	--bs-btn-bg: var(--bs-body-bg);
+	--bs-btn-color: var(--bs-body-color);
+	--bs-btn-border-color: var(--bs-border-color-translucent);
+	--bs-btn-hover-bg: var(--bs-tertiary-bg);
+	--bs-btn-hover-color: var(--bs-heading-color, #fff);
+	--bs-btn-hover-border-color: var(--bs-border-color);
+	--bs-btn-active-bg: var(--bs-secondary-bg);
+}
+
+
+/**
  * ====================================
  * TEXT COLORS
  * ====================================
