@@ -10,11 +10,12 @@ namespace JuniWalk\Components\DocumentPreview;
 use JuniWalk\Components\Actions\LinkProvider;
 use JuniWalk\Components\Actions\Traits\Actions;
 use JuniWalk\Components\Actions\Traits\Links;
+use JuniWalk\Security\Interfaces\TokenProvider;
 use JuniWalk\Utils\Format;
 use JuniWalk\Utils\GoogleChrome;
 use JuniWalk\Utils\Interfaces\EventHandler;
 use JuniWalk\Utils\Interfaces\Modal;
-use JuniWalk\Utils\Interfaces\TokenProvider;
+use JuniWalk\Utils\Interfaces\TokenProvider as TokenProviderBC;
 use JuniWalk\Utils\Strings;
 use JuniWalk\Utils\Traits\Events;
 use JuniWalk\Utils\Traits\RedirectAjaxHandler;
@@ -85,8 +86,8 @@ class DocumentPreview extends Control implements EventHandler, Modal, LinkProvid
 		$params = $this->getParameters();
 		$parent = $this->getPresenter();
 
-		if (!$parent instanceof TokenProvider) {
-			throw new BadRequestException('Presenter needs to implement '.TokenProvider::class);
+		if (!$parent instanceof TokenProvider && !$parent instanceof TokenProviderBC) {
+			throw new BadRequestException('Presenter needs to implement '.TokenProvider::class.' or '.TokenProviderBC::class);
 		}
 
 		try {
