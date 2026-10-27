@@ -34,7 +34,7 @@ class SidebarExtension
 
 	#saveState() {
 		let bodyClass = document.body.classList;
-		let status = bodyClass.contains(this.#classClose)
+		let status = bodyClass.contains(this.#classOpen)
 			? this.#classClose
 			: this.#classOpen;
 
