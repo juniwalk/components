@@ -34,6 +34,7 @@
 		"doctrine/orm": "^2.0|^3.0",
 		"latte/latte": "^3.0",
 		"league/commonmark": "^2.0",
+		"juniwalk/security": "*",
 		"nette/application": "^3.0",
 		"nette/security": "^3.0",
 		"nette/forms": "^3.0",
@@ -44,6 +45,11 @@
 		"scrivo/highlight.php": "^9.0",
 		"staabm/phpstan-todo-by": "^0.3",
 		"tracy/tracy": "^2.0"
+	},
+
+	"scripts": {
+		"lint": "phpstan analyze",
+		"test": "tester tests/ -C"
 	},
 
     "suggest": {
