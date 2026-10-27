@@ -17,11 +17,13 @@ use JuniWalk\Components\Actions\Controls\Group;
 use JuniWalk\Utils\Strings;
 use Nette\Application\UI\Link;
 use Nette\Application\UI\Presenter;
+use Nette\ComponentModel\IContainer;
 use Nette\Utils\Random;
 use Stringable;
 
 /**
  * @phpstan-import-type LinkArgs from LinkProvider
+ * @phpstan-require-implements IContainer
  */
 trait Actions
 {
@@ -91,12 +93,19 @@ trait Actions
 
 
 	/**
-	 * @return array<int|string, Action>
+	 * @return array<string, Action>
 	 */
-	public function getActions(): iterable
+	public function getActions(): array
 	{
-		/** @var array<int|string, Action> */
-		return $this->getComponents(false, Action::class);
+		$actions = [];
+
+		foreach ($this->getComponents() as $name => $component) {
+			if ($component instanceof Action) {
+				$actions[$name] = $component;
+			}
+		}
+
+		return $actions;
 	}
 
 
